@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Email Verification</title>
+      <style>
+            .title {
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-size: 20px;
+            }
+
+            .isi {
+                  background-color: #142746;
+                  color: #f1ecf2;
+                  width: 50px;
+                  height: 30px;
+                  font-size: 16px;
+                  padding: 2px;
+                  border-radius: 5px;
+
+            }
+      </style>
+</head>
+
+<body>
+      <div>
+            <h1 class="title">Hallo {{username}}, welcome to EventUs</h1>
+            <a href={{link}} target="_blank"></a>
+            <a href={{link}} class="isi" target="_blank">Verify</a>
+            <p>Button will guide you to verify your account</p>
+      </div>
+</body>
+
+</html>

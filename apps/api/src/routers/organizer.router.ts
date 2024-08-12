@@ -14,7 +14,6 @@ export class OragnizerRouter {
 
       private initializeRoutes() : void {
             this.router.get("/", this.organizerController.getOrganizerData)
-            this.router.post("/", this.organizerController.createUserData)
       }
 
       getRouter() : Router {

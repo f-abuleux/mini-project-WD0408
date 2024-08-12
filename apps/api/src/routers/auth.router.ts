@@ -12,7 +12,10 @@ export class AuthRouter {
       }
 
       private initializeRoutes(): void {
-            this.router.post("/", this.authController.createUserData)
+            this.router.post("/authuser", this.authController.createUserData)
+            this.router.post("/login", this.authController.loginUserData)
+            this.router.get("/verify/:token", this.authController.verifyToken)
+
       }
 
       getRouter(): Router {

@@ -33,7 +33,9 @@ export default function SignUpUser() {
       const [user, setUser] = useState<ISignUpUser | null>(null);
 
       const initialValues: ISignUpUser = {
-            username: "", email: "", password: "",
+            username: "", 
+            email: "",
+            password: "",
             referalcode: ""
       };
 
@@ -136,7 +138,7 @@ export default function SignUpUser() {
                                                                         className="mt-4 text-secondary w-[100px] md:min-w-[150px] text-center  py-1 rounded-full font-semibold hover:bg-secondary hover:text-primary hover:border-[1px] hover:w-[155px]  duration-300 ease-in-out border-[1px] active:bg-third "
                                                                   >Sign Up</button>
                                                                   <p className=" text-secondary text-[12px] text-center font-[normal]">
-                                                                        already have an EventUs account? <Link href="/login" className="text-third hover:font-[bold] hover:text-secondary duration-300 font-[normal]">login</Link></p>
+                                                                        already have an EventUs account? <Link href="/loginuser" className="text-third hover:font-[bold] hover:text-secondary duration-300 font-[normal]">login</Link></p>
                                                             </div>
                                                       </Form>
                                                 </div>

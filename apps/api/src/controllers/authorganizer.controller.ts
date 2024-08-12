@@ -1,20 +1,18 @@
 import { createToken } from "@/helpers/createToken"
 import { hashPass } from "@/helpers/hashpassword"
-import { transporter } from "@/helpers/nodemailer"
 import prisma from "@/prisma"
 import { compare } from "bcrypt"
 import { Request, Response } from "express"
 import path from 'path'
 import fs from 'fs'
 import handlebars from "handlebars"
+import { transporter } from "@/helpers/nodemailer"
 import jwt from 'jsonwebtoken'
-import { referalCodeGenerator } from "@/helpers/referalcodegenerator"
 
-export class AuthController {
-      async createUserData(req: Request, res: Response) {
-            
+export class AuthOrganizerController {
+      async createEventOrganizerData(req: Request, res: Response) {
             try {
-                  const newUser = await prisma.user.findFirst({
+                  const newUser = await prisma.eventOrganizer.findFirst({
                         where: {
                               OR: [
                                     { username: req.body.username },
@@ -27,8 +25,7 @@ export class AuthController {
 
                   const password = await hashPass(req.body.password)
 
-                  const createdUser = await prisma.user.create({ data: { ...req.body, password } })
-
+                  const createdUser = await prisma.eventOrganizer.create({ data: {...req.body, password} })
                   const token = createToken({  id: createdUser.id, role: createdUser.role }, '365d')
 
                   const templatePath = path.join(__dirname, '../templates', "verify.hbs")
@@ -36,7 +33,7 @@ export class AuthController {
                   const compiledTemplate = handlebars.compile(templateSource)
                   const html = compiledTemplate({ 
                         username : req.body.username,
-                        link : `http://localhost:3000/verify/${token}`
+                        link : `http://localhost:3000/verifyeventorganizer/${token}`
                   })
                   console.log(token)
 
@@ -49,7 +46,7 @@ export class AuthController {
 
                   res.status(200).send({
                         status: 'Success created user',
-                        data: createdUser,
+                        data: createdUser
                   })
             } catch (error) {
                   res.status(400).send({
@@ -59,31 +56,32 @@ export class AuthController {
             }
       }
 
-      async loginUserData(req: Request, res: Response) {
+      async loginEventOrganizerData(req: Request, res: Response) {
             try {
-                  const user = await prisma.user.findFirst({
+                  const user = await prisma.eventOrganizer.findFirst({
                         where: {
                               OR: [
                                     { username: req.body.username },
-                                    { email: req.body.username}
+                                    { email: req.body.username }
                               ]
                         }
                   })
                   // console.log(user)
-
+                  
                   if (!user) throw 'User not found'
                   if (!user.isVerify) throw 'User not verified'
-
+                  
                   const isValidPass = await compare(req.body.password, user.password)
                   if (!isValidPass) throw 'Incorrect password'
 
                   const token = createToken({ id: user.id, role: user.role})
 
+
                   res.status(200).send({
                         status: 'ok',
                         msg: 'Success login user',
                         token,
-                        user
+                        eventOrganizer: user
                   })
             } catch (error) {
                   res.status(400).send({
@@ -100,17 +98,14 @@ export class AuthController {
                         if (err) {
                               res.status(400).send("Invalid token")
                         } else {
-                              const verifiedUser = await prisma.user.update({
+                              const verifiedUser = await prisma.eventOrganizer.update({
                                     where: {
                                           id: (user as { id: number }).id
                                     },
                                     data: {
-                                          isVerify: true,
-                                          referalnumber: referalCodeGenerator(),
-                                          point: 0
+                                          isVerify: true
                                     }
                               })
-                              // res.render("verifyToken")
                               res.status(200).send({
                                     status: 'Success verify user',
                                     data : { isVerified : true }

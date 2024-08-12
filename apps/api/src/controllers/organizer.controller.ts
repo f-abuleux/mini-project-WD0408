@@ -17,32 +17,5 @@ export class OrganizerController {
             }
       }
 
-      async createUserData(req: Request, res: Response) {
-            try {
-                  const newUser = await prisma.eventOrganizer.findFirst({
-                        where: {
-                              OR: [
-                                    { usernameCreator: req.body.username },
-                                    { email: req.body.email }
-                              ]
-                        }
-                  })
-                  if (newUser?.usernameCreator === req.body.usernameCreator) throw 'Username already exist'
-                  if (newUser?.email === req.body.email) throw 'Email already exist'
 
-                  const createdUser = await prisma.eventOrganizer.create({
-                        data: req.body
-                  })
-
-                  res.status(200).send({
-                        status: 'Success created user',
-                        data: createdUser
-                  })
-            } catch (error) {
-                  res.status(400).send({
-                        status: "Failed created user",
-                        msg: error
-                  })
-            }
-      }
 }

@@ -1,36 +1,45 @@
 "use client";
 
-import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps } from "formik";
 import * as yup from "yup";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { loginUser } from "@/libs/action/user";
+import { loginOrganizer } from "@/libs/action/organizer";
+import { createCookie, deleteCookie } from "@/libs/action/server";
+import { useRouter } from "next/navigation";
 
 const signUpSchema = yup.object().shape({
-      data: yup.string().required("username is required"),
+      username: yup.string().required("username is required"),
       password: yup.string().required("password is required"),
 });
 
 export interface ILogin {
-      data: string;
+      username: string;
       password: string;
 }
+const initialValues: ILogin = { username: "", password: "" };
+
 export default function Login() {
+      const router = useRouter()
 
-      const initialValues: ILogin = { data: "", password: "" };
-
-      const onLogin = async (data: ILogin) => {
+      const onLogin = async (data: ILogin, action : FormikHelpers<ILogin>) => {
             try {
-                  const { result, ok } = await loginUser(data)
-                  if (!ok) throw result.msg
+                  const { result, ok } = await loginOrganizer(data)
+                  if (!ok) {
+                        throw result.msg
+                  }
+                  createCookie('token', result.token)
+                  router.push('/beranda')
+                  console.log(result)
+                  console.log(ok)
             } catch (error) {
                   console.log(error)
             }
       }
 
       return (
-            <div className="bg-primary" id="#login">
+            <div className="bg-primary" id="#loginorganizer">
                   <div className="flex justify-center">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"
@@ -47,13 +56,13 @@ export default function Login() {
                               />
                         </div>
                         <div className="mb-40">
-                              <h1 className="font-bold mt-6 mb-6 mx-10 font-[bold] text-[28px] text-secondary p-1">WELCOME BACK!</h1>
-                              <p className="pl-12 text-secondary text-[12px] font-[normal]">Create your EventUs account here! <Link href="/registeruser" className="text-third hover:font-[bold] font-[normal] hover:text-secondary duration-300 ">register</Link></p>
+                              <h1 className="font-bold mt-6 mb-6 mx-10 font-[bold] text-[28px] text-secondary p-1">WELCOME BACK! ORGANIZER</h1>
+                              <p className="pl-12 text-secondary text-[12px] font-[normal]">Create your EventUs account here! <Link href="/registerorganizer" className="text-third hover:font-[bold] font-[normal] hover:text-secondary duration-300 ">register</Link></p>
                               <Formik
                                     initialValues={initialValues}
                                     validationSchema={signUpSchema}
                                     onSubmit={(values, action) => {
-                                          onLogin(values)
+                                          onLogin(values, action)
                                           action.resetForm()
                                           console.log(values);
                                     }}
@@ -67,7 +76,7 @@ export default function Login() {
                                                                         <Field
                                                                               type="text"
                                                                               name="username"
-                                                                              placeholder="Userame or email"
+                                                                              placeholder="Username"
                                                                               className=" md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none "
                                                                         />
                                                                         <ErrorMessage
