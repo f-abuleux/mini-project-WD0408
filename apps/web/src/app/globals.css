@@ -2,43 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-}
 
-html {
-      scroll-behavior: smooth;
-      animation: ease-in-out;
+@layer base {
+    @font-face {
+          font-family: 'bold';
+          font-style: normal;
+          font-weight: 400;
+          font-display: "cabrion";
+          src: url(/font-cabrionfont/Cabrion-Bold.ttf) format('truetype');
+    }
 }
 
 @layer base {
-      @font-face {
-            font-family: 'bold';
-            font-style: normal;
-            font-weight: 400;
-            font-display: "cabrion";
-            src: url(/font-cabrionfont/Cabrion-Bold.ttf) format('truetype');
-      }
+    @font-face {
+          font-family: 'semi-bold';
+          font-style: normal;
+          font-weight: 400;
+          font-display: "cabrion";
+          src: url(/font-cabrionfont/Cabrion-SemiBold.ttf) format('truetype');
+    }
 }
 
 @layer base {
-      @font-face {
-            font-family: 'semi-bold';
-            font-style: normal;
-            font-weight: 400;
-            font-display: "cabrion";
-            src: url(/font-cabrionfont/Cabrion-SemiBold.ttf) format('truetype');
-      }
+    @font-face {
+          font-family: 'normal';
+          font-style: normal;
+          font-weight: 400;
+          font-display: "cabrion";
+          src: url(/font-cabrionfont/Cabrion-Regular.ttf) format('truetype');
+    }
 }
 
-@layer base {
-      @font-face {
-            font-family: 'normal';
-            font-style: normal;
-            font-weight: 400;
-            font-display: "cabrion";
-            src: url(/font-cabrionfont/Cabrion-Regular.ttf) format('truetype');
-      }
-}
