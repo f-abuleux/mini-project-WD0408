@@ -10,6 +10,12 @@ import express, {
 import cors from 'cors';
 import { PORT } from './config';
 import { SampleRouter } from './routers/sample.router';
+import { UserRouter } from './routers/user.router';
+import { OragnizerRouter } from './routers/organizer.router';
+import { AuthRouter } from './routers/auth.router';
+import { AuthOrganizerRouter } from './routers/authorganizer.router';
+import exphbs from "express-handlebars";
+
 
 export default class App {
   private app: Express;
@@ -20,7 +26,7 @@ export default class App {
     this.routes();
     this.handleError();
   }
-
+  
   private configure(): void {
     this.app.use(cors());
     this.app.use(json());
@@ -52,15 +58,28 @@ export default class App {
 
   private routes(): void {
     const sampleRouter = new SampleRouter();
+    const userRouter = new UserRouter();
+    const organizerRouter = new OragnizerRouter();
+    const authRouter = new AuthRouter();
+    const authOrganizerRouter = new AuthOrganizerRouter();
 
     this.app.get('/api', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student API!`);
     });
 
     this.app.use('/api/samples', sampleRouter.getRouter());
+    this.app.use("/api/users", userRouter.getRouter()); 
+    this.app.use("/api/organizers", organizerRouter.getRouter());
+    this.app.use("/api/auth",  authRouter.getRouter());
+    this.app.use("/api/authorganizer", authOrganizerRouter.getRouter())
+    // const hbs = exphbs.create({ extname: '.hbs' });
+    // this.app.engine('hbs', hbs.engine);
+    // this.app.set("view engine", "hbs");
+    // this.app.set("views", "views");
   }
 
   public start(): void {
+
     this.app.listen(PORT, () => {
       console.log(`  ➜  [API] Local:   http://localhost:${PORT}/`);
     });
