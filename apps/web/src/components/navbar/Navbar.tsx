@@ -17,7 +17,7 @@ import MenuRegister from "./menuRegister";
 export default function NavbarBeranda() {
     return (
         <div>
-            <Navbar shouldHideOnScroll className="fixed top-0 z-50 pt-5">
+            <Navbar shouldHideOnScroll className="fixed top-0 z-50 pt-10">
             <NavbarBrand>
                 <Image src="/Logo-minpro.png" alt="Logo" width={120} height={100} className='pl-5' />
             </NavbarBrand>

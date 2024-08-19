@@ -8,6 +8,8 @@ import Image from "next/image";
 import { loginOrganizer } from "@/libs/action/organizer";
 import { createCookie, deleteCookie } from "@/libs/action/server";
 import { useRouter } from "next/navigation";
+import { Metadata } from "next";
+import { toast } from "react-toastify";
 
 const signUpSchema = yup.object().shape({
       username: yup.string().required("username is required"),
@@ -33,19 +35,20 @@ export default function Login() {
                   router.push('/beranda')
                   console.log(result)
                   console.log(ok)
+                  toast.info(result.msg)
             } catch (error) {
                   console.log(error)
             }
       }
 
       return (
-            <div className="bg-primary" id="#loginorganizer">
+            <div className="bg-primary pt-10" id="#loginorganizer">
                   <div className="flex justify-center">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"
                         />
                   </div>
-                  <div className="flex flex-col sm:flex-row w-svh justify-center items-center ">
+                  <div className="flex flex-col sm:flex-row w-svh justify-center items-center pt-10">
                         <div className="p-5">
                               <Image
                                     src="/photo/1concert.jpg"
@@ -77,7 +80,7 @@ export default function Login() {
                                                                               type="text"
                                                                               name="username"
                                                                               placeholder="Username"
-                                                                              className=" md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none "
+                                                                              className="text-white md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none "
                                                                         />
                                                                         <ErrorMessage
                                                                               name="username"
@@ -90,7 +93,7 @@ export default function Login() {
                                                                               type="password"
                                                                               name="password"
                                                                               placeholder="Password"
-                                                                              className=" md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                              className="text-white md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
                                                                         />
                                                                         <ErrorMessage
                                                                               name="password"

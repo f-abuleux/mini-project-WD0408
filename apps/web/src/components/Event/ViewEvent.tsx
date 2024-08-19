@@ -37,7 +37,7 @@ export default function ViewEvent() {
                                                 <h4 className="font-semibold text-secondary pb-2"><span></span>Tanggal Event</h4>
                                                 <h4 className="font-semibold text-secondary pb-10">Location</h4>
                                                 <div className="flex gap-5 justify-center pt-[100px] pb-3">
-                                                    <Link href="/" className="text-primary font-semibold py-2 px-[80px] rounded-full bg-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out hover:text-white">Buy Ticket</Link>
+                                                    <Link href="/checkout" className="text-primary font-semibold py-2 px-[80px] rounded-full bg-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out hover:text-white">Buy Ticket</Link>
                                                 </div>
                                             </div>
                                         </div>

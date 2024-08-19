@@ -5,9 +5,9 @@ import MenuAvatarUser from "./menuAvatarUser";
 
 export default function NavbarUser() {
     return (
-        <Navbar shouldHideOnScroll className="fixed top-0 z-50 hidden lg:flex pt-10">
+        <Navbar shouldHideOnScroll className="fixed top-0 z-50 hidden lg:flex pt-5">
             <NavbarBrand className="pl-5">
-                <Image src="/Logo-minpro.png" alt="Logo" width={120} height={100} className='' />
+                <Image src="/Logo-minpro.png" alt="Logo" width={100} height={100} className='' />
             </NavbarBrand>
             <NavbarContent className="flex gap-16 py-3 pr-3">
                 <NavbarItem>

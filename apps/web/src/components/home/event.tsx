@@ -3,6 +3,9 @@ import Link from "next/link"
 import img1 from '@/app/(home)/beranda/components/eventberbayar.png';
 import img2 from '@/app/(home)/beranda/components/eventgratis.png';
 import { TbArmchair } from "react-icons/tb";
+import AvatarUserEo from "../Profile/AvatarUserProfile";
+import CardEventHome from "./CardEventHome";
+import Pagination from "./Pagination";
 
 export default function EventPresent() {
     return (
@@ -16,7 +19,7 @@ export default function EventPresent() {
                     <h3 className="text-lg text-secondary pt-8 pb-5 flex justify-center lg:justify-start">- EVENT TICKET -</h3>
                     <div className="flex flex-wrap justify-center gap-10 pb-5 lg:justify-start lg:pb-0">
                         <input type="text" name="data" placeholder="Search Event Ticket" className="w-[330px] py-1 px-3 rounded-md bg-transparent text-secondary border border-solid border-secondary text-start" />
-                        <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
+                        <select id="Month" className="bg-white text-primary pr-10 text-center rounded-md">
                             <option selected className="text-gray-500">Mouth</option>
                             <option value="January">January</option>
                             <option value="Feburary">February</option>
@@ -31,7 +34,7 @@ export default function EventPresent() {
                             <option value="November">November</option>
                             <option value="December">December</option>
                         </select>
-                        <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
+                        <select id="City" className="bg-white text-primary pr-10 text-center rounded-md">
                             <option value="City" className="text-gray-500">City</option>
                             <option value="Bandung">Bandung</option>
                             <option value="Jakarta">Jakarta</option>
@@ -39,60 +42,21 @@ export default function EventPresent() {
                             <option value="Semarang">Semarang</option>
                             <option value="Surabaya">Surabaya</option>
                         </select>
+                    <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
+                            <option value="Category" className="text-gray-500">Category</option>
+                            <option value="Film">Film</option>
+                            <option value="Music">Music</option>
+                            <option value="Game">Game</option>
+                        </select>
                     </div>
                 </div>
                 <div className=" flex flex-wrap justify-center pb-5 p-5 lg:pt-10">
-                    <div className="w-full px-6 lg:w-[400px]">
-                        <div className="bg-gradient-to-t from-indigo-950 to-gray-500 rounded-xl overflow-hidden shadow-lg mb-10">
-                            <Image src="/eventberbayar.png" alt="Event Ticket" width={1000} height={100} className="w-full" />
-                            <div className="py-12 px-6">
-                                <h3><Link href="/" className="font-semibold text-third text-2xl hover:text-secondary">Event Name</Link></h3>
-                                <h4 className="font-semibold text-secondary pb-2">Jakarta - 25 August 2024</h4>
-                                <div className="flex pb-2 gap-1">
-                                    <TbArmchair size={22} className="text-white" />
-                                    <p className="text-white text-[14px]">- <span>0</span></p>
-                                </div>
-                                <p className="text-secondary pb-3 text-sm">This event is specially created for those of you who are looking for entertainment or training events filled by famous people!</p>
-                                <p className="text-secondary font-semibold">Price</p>
-                                <p className="text-secondary font-semibold pb-10 text-xl">Rp.50.000</p>
-                                <Link href="/" className="text-secondary py-3 px-3 pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">Booking Ticket</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full px-6 lg:w-[400px]">
-                        <div className="bg-gradient-to-t from-indigo-950 to-gray-500 rounded-xl overflow-hidden shadow-lg mb-10">
-                            <Image src="/eventberbayar.png" alt="Event Ticket" width={1000} height={100} className="w-full" />
-                            <div className="py-12 px-6">
-                                <h3><Link href="/" className="font-semibold text-third text-2xl hover:text-secondary">Event Name</Link></h3>
-                                <h4 className="font-semibold text-secondary pb-2">Jakarta - 25 August 2024</h4>
-                                <div className="flex pb-2 gap-1">
-                                    <TbArmchair size={22} className="text-white" />
-                                    <p className="text-white text-[14px]">- <span>0</span></p>
-                                </div>
-                                <p className="text-secondary pb-3 text-sm">This event is specially created for those of you who are looking for entertainment or training events filled by famous people!</p>
-                                <p className="text-secondary font-semibold">Price</p>
-                                <p className="text-secondary font-semibold pb-10 text-xl">Rp.50.000</p>
-                                <Link href="/" className="text-secondary py-3 px-3 pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">Booking Ticket</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full px-6 lg:w-[400px]">
-                        <div className="bg-gradient-to-t from-indigo-950 to-gray-500 rounded-xl overflow-hidden shadow-lg mb-10">
-                            <Image src="/eventberbayar.png" alt="Event Ticket" width={1000} height={100} className="w-full" />
-                            <div className="py-12 px-6">
-                                <h3><Link href="/" className="font-semibold text-third text-2xl hover:text-secondary">Event Name</Link></h3>
-                                <h4 className="font-semibold text-secondary pb-2">Jakarta - 25 August 2024</h4>
-                                <div className="flex pb-2 gap-1">
-                                    <TbArmchair size={22} className="text-white" />
-                                    <p className="text-white text-[14px]">- <span>0</span></p>
-                                </div>
-                                <p className="text-secondary pb-3 text-sm">This event is specially created for those of you who are looking for entertainment or training events filled by famous people!</p>
-                                <p className="text-secondary font-semibold">Price</p>
-                                <p className="text-secondary font-semibold pb-10 text-xl">Rp.50.000</p>
-                                <Link href="/" className="text-secondary py-3 px-3 pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">Booking Ticket</Link>
-                            </div>
-                        </div>
-                    </div> 
+                    <CardEventHome />
+                    <CardEventHome />
+                    <CardEventHome />
+                </div>
+                <div>
+                    <Pagination />
                 </div>
                 <div id="EventFree" className="lg:pl-[110px]">
                     <h3 className="text-lg text-secondary pt-8 pb-5 flex justify-center lg:justify-start">- FREE EVENT -</h3>
@@ -121,60 +85,21 @@ export default function EventPresent() {
                             <option value="Semarang">Semarang</option>
                             <option value="Surabaya">Surabaya</option>
                         </select>
+                        <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
+                            <option value="Category" className="text-gray-500">Category</option>
+                            <option value="Film">Film</option>
+                            <option value="Music">Music</option>
+                            <option value="Game">Game</option>
+                        </select>
                     </div>
                 </div>
                 <div className=" flex flex-wrap justify-center pb-5 p-5 lg:pt-10">
-                    <div className="w-full px-6 lg:w-[400px]">
-                        <div className="bg-gradient-to-t from-indigo-950 to-gray-500 rounded-xl overflow-hidden shadow-lg mb-10">
-                            <Image src="/eventberbayar.png" alt="Event Ticket" width={1000} height={100} className="w-full" />
-                            <div className="py-12 px-6">
-                                <h3><Link href="/" className="font-semibold text-third text-2xl hover:text-secondary">Event Name</Link></h3>
-                                <h4 className="font-semibold text-secondary pb-2">Jakarta - 25 August 2024</h4>
-                                <div className="flex pb-2 gap-1">
-                                    <TbArmchair size={22} className="text-white" />
-                                    <p className="text-white text-[14px]">- <span>0</span></p>
-                                </div>
-                                <p className="text-secondary pb-3 text-sm">This event is specially created for those of you who are looking for entertainment or training events filled by famous people!</p>
-                                <p className="text-secondary font-semibold">Price</p>
-                                <p className="text-secondary font-semibold pb-10 text-xl">Rp.50.000</p>
-                                <Link href="/" className="text-secondary py-3 px-3 pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">Booking Ticket</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full px-6 lg:w-[400px]">
-                        <div className="bg-gradient-to-t from-indigo-950 to-gray-500 rounded-xl overflow-hidden shadow-lg mb-10">
-                            <Image src="/eventberbayar.png" alt="Event Ticket" width={1000} height={100} className="w-full" />
-                            <div className="py-12 px-6">
-                                <h3><Link href="/" className="font-semibold text-third text-2xl hover:text-secondary">Event Name</Link></h3>
-                                <h4 className="font-semibold text-secondary pb-2">Jakarta - 25 August 2024</h4>
-                                <div className="flex pb-2 gap-1">
-                                    <TbArmchair size={22} className="text-white" />
-                                    <p className="text-white text-[14px]">- <span>0</span></p>
-                                </div>
-                                <p className="text-secondary pb-3 text-sm">This event is specially created for those of you who are looking for entertainment or training events filled by famous people!</p>
-                                <p className="text-secondary font-semibold">Price</p>
-                                <p className="text-secondary font-semibold pb-10 text-xl">Rp.50.000</p>
-                                <Link href="/" className="text-secondary py-3 px-3 pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">Booking Ticket</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full px-6 lg:w-[400px]">
-                        <div className="bg-gradient-to-t from-indigo-950 to-gray-500 rounded-xl overflow-hidden shadow-lg mb-10">
-                            <Image src="/eventberbayar.png" alt="Event Ticket" width={1000} height={100} className="w-full" />
-                            <div className="py-12 px-6">
-                                <h3><Link href="/" className="font-semibold text-third text-2xl hover:text-secondary">Event Name</Link></h3>
-                                <h4 className="font-semibold text-secondary pb-2">Jakarta - 25 August 2024</h4>
-                                <div className="flex pb-2 gap-1">
-                                    <TbArmchair size={22} className="text-white" />
-                                    <p className="text-white text-[14px]">- <span>0</span></p>
-                                </div>
-                                <p className="text-secondary pb-3 text-sm">This event is specially created for those of you who are looking for entertainment or training events filled by famous people!</p>
-                                <p className="text-secondary font-semibold">Price</p>
-                                <p className="text-secondary font-semibold pb-10 text-xl">Rp.50.000</p>
-                                <Link href="/" className="text-secondary py-3 px-3 pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">Booking Ticket</Link>
-                            </div>
-                        </div>
-                    </div> 
+                    <CardEventHome />
+                    <CardEventHome />
+                    <CardEventHome />
+                </div>
+                <div>
+                    <Pagination />
                 </div>
                 <div className="p-20 flex flex-wrap gap-32 justify-center">
                     <div>

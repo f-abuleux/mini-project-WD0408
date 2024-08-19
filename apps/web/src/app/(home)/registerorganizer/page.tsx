@@ -6,6 +6,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { registerOrganizer } from "@/libs/action/organizer";
+import { Metadata } from "next";
+import { toast } from "react-toastify";
+
 
 const signUpSchema = yup.object().shape({
       username: yup.string().required("username is required"),

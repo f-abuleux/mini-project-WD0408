@@ -19,7 +19,7 @@ export default function ContentWelcome() {
             <div className="w-full bg-gradient-to-b from-primary to-primary to-20% pb-32 lg:pb-44">
                 <div>
                 <Image src="/bg4.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:hidden lg:hidden" />
-                <Image src="/bg2.png" alt="Background" width={1400} height={100} className="absolute opacity-60" />
+                <Image src="/bg2.png" alt="Background" width={1440} height={100} className="absolute opacity-60" />
                 </div>
                 <div className="w-full lg:justify-center p-5 relative pt-36">
                     <div className="pb-10 text-center lg:px-52 lg:pt-20">
