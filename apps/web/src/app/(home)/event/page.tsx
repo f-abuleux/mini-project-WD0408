@@ -1,6 +1,13 @@
+import CardReviewUser from "@/components/Event/CardReviewUser";
 import ReviewEvent from "@/components/Event/ReviewEvent";
 import ViewEvent from "@/components/Event/ViewEvent";
 import NavbarUser from "@/components/navbar/Navbar.User";
+import { Metadata } from "next";
+
+export const metadata:Metadata = {
+    title: 'View / EventUs',
+    description: 'View Event'
+}
 
 export default function PageEvent () {
     return (
@@ -8,6 +15,7 @@ export default function PageEvent () {
             <NavbarUser />
             <ViewEvent />
             <ReviewEvent />
+            <CardReviewUser />
         </div>
     )
 }

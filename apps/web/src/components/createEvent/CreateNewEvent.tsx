@@ -7,7 +7,7 @@ import MenuEventTicketFree from "./menuEventTicketFree"
 export default function CreateEvent() {
     return (
         <div>
-            <div className="w-full bg-gradient-to-b from-primary to-primary to-20% lg:pb-20">
+            <div className="w-full bg-gradient-to-b from-primary to-primary to-20% pb-20 lg:pb-20">
                 <div>
                     <Image src="/createEvents.png" alt="Background" width={1500} height={1000} className="absolute opacity-50" />
                 </div>
@@ -22,7 +22,7 @@ export default function CreateEvent() {
                         create a truly amazing event according to your wishes and targets
                     </p>
                 </div>
-                <div className="flex justify-center gap-20 pt-2 relative">
+                <div className="flex flex-wrap justify-center gap-20 pt-2 relative">
                     <div className="w-full px-6 lg:w-[400px]">
                         <div className="bg-gradient-to-t from-violet-900 to-violet-950 rounded-xl overflow-hidden shadow-2xl mb-10 z-50">
                             <h1 className="text-white text-4xl font-bold text-center py-5 px-10 bg-gradient-to-l from-purple-700 to-primary ">EVENT TICKET</h1>
@@ -41,6 +41,8 @@ export default function CreateEvent() {
                             </div>
                         </div>
                     </div>
+                    <div className="divider divider-secondary text-white lg:hidden">OR</div>
+                    <div className="divider divider-horizontal divider-secondary text-white hidden lg:flex">OR</div>
                     <div className="w-full px-6 lg:w-[400px]">
                         <div className="bg-gradient-to-t from-violet-900 to-violet-950 rounded-xl overflow-hidden shadow-2xl mb-10 z-50">
                             <h1 className="text-white text-4xl font-bold text-center py-5 px-10 bg-gradient-to-l from-purple-700 to-primary ">FREE EVENT</h1>

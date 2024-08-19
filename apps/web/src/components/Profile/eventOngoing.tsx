@@ -17,7 +17,7 @@ export default function EventOngoing() {
                             <div className="py-12 px-6">
                                 <div className="flex gap-[100px]">
                                     <div>
-                                        <h3><Link href="/" className="font-semibold text-third text-2xl hover:text-secondary">Event Name</Link></h3>
+                                        <h3><Link href="/event" className="font-semibold text-third text-2xl hover:text-secondary">Event Name</Link></h3>
                                         <h4 className="font-semibold text-secondary pb-2">Tanggal Event</h4>
                                     </div>
                                     <div>

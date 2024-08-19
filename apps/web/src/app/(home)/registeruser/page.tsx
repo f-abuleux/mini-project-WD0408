@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { registerUser } from "@/libs/action/user";
 import { ToastContainer, toast } from 'react-toastify';
+import { Metadata } from "next";
 
 const signUpSchema = yup.object().shape({
       username: yup.string().required("username is required"),
@@ -51,13 +52,13 @@ export default function SignUpUser() {
             }
       }
       return (
-            <div className="bg-primary " id="#registeruser">
+            <div className="bg-primary pt-10" id="#registeruser">
                   <div className="flex justify-center">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"
                         />
                   </div>
-                  <div className="flex flex-col sm:flex-row h-svh justify-center items-center">
+                  <div className="flex flex-col sm:flex-row h-svh justify-center items-center pt-10">
                         <div className="p-5">
                               <Image
                                     src="/photo/1concert.jpg"
@@ -67,9 +68,8 @@ export default function SignUpUser() {
                                     className="mb-10 sm:mb-48 shadow-lg border-[1px] rounded-[20px]"
                               />
                         </div>
-                        <div className="mb-40 flex flex-col">
-
-                              <h1 className="font-bold  mx-10 font-[bold] text-[28px] text-secondary p-1">CREATE YOUR ACCOUNT!</h1>
+                        <div className="mb-40 flex flex-col pt-10">
+                              <h1 className="font-bold mx-10 font-[bold] text-[28px] text-secondary p-1">CREATE YOUR ACCOUNT!</h1>
                               <Formik
                                     initialValues={initialValues}
                                     validationSchema={signUpSchema}
@@ -90,7 +90,7 @@ export default function SignUpUser() {
                                                                               type="text"
                                                                               name="username"
                                                                               placeholder="Username"
-                                                                              className="md:min-w-[500px] mx-10  rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                              className="text-white md:min-w-[500px] mx-10  rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
                                                                         />
                                                                         <ErrorMessage
                                                                               name="username"
@@ -103,7 +103,7 @@ export default function SignUpUser() {
                                                                               type="text"
                                                                               name="email"
                                                                               placeholder="Email"
-                                                                              className="md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                              className="text-white md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
                                                                         />
                                                                         <ErrorMessage
                                                                               name="email"
@@ -116,7 +116,7 @@ export default function SignUpUser() {
                                                                               type="password"
                                                                               name="password"
                                                                               placeholder="Password"
-                                                                              className=" md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                              className="text-white md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
                                                                         />
                                                                         <ErrorMessage
                                                                               name="password"
@@ -127,8 +127,10 @@ export default function SignUpUser() {
                                                                   <Field
                                                                         type="text"
                                                                         name="referalcode"
-                                                                        placeholder="referralcode?"
-                                                                        className="md:min-w-[500px] mx-10  rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+
+                                                                        placeholder="referalcode?"
+                                                                        className="text-white md:min-w-[500px] mx-10  rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                    
                                                                   />
                                                                   <ErrorMessage
                                                                         name="referalcode"

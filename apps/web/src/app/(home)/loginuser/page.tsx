@@ -5,9 +5,12 @@ import * as yup from "yup";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {  loginUser } from "@/libs/action/user";
+import { loginUser } from "@/libs/action/user";
 import { createCookie, deleteCookie } from "@/libs/action/server";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { result } from "cypress/types/lodash";
+
 
 const signUpSchema = yup.object().shape({
       username: yup.string().required("username is required"),
@@ -23,7 +26,7 @@ const initialValues: ILogin = { username: "", password: "" };
 export default function Login() {
       const router = useRouter()
 
-      const onLogin = async (data: ILogin, action : FormikHelpers<ILogin>) => {
+      const onLogin = async (data: ILogin, action: FormikHelpers<ILogin>) => {
             try {
                   const { result, ok } = await loginUser(data)
                   if (!ok) {
@@ -33,19 +36,21 @@ export default function Login() {
                   router.push('/beranda')
                   console.log(result)
                   console.log(ok)
+                  toast.info(result.msg)
             } catch (error) {
                   console.log(error)
             }
       }
 
       return (
-            <div className="bg-primary" id="#loginuser">
-                  <div className="flex justify-center">
+            <div className="bg-gradient-to-b from-primary to-primary to-20%" id="#loginuser">
+                  <Image src="/bg5.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[1440px]" />
+                  <div className="flex justify-center relative pt-10">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"
                         />
                   </div>
-                  <div className="flex flex-col sm:flex-row w-svh justify-center items-center ">
+                  <div className="flex flex-col:flex-row w-svh justify-center items-center pt-10 relative">
                         <div className="p-5">
                               <Image
                                     src="/photo/1concert.jpg"
@@ -77,7 +82,7 @@ export default function Login() {
                                                                               type="text"
                                                                               name="username"
                                                                               placeholder="Username"
-                                                                              className=" md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none "
+                                                                              className="text-white md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none "
                                                                         />
                                                                         <ErrorMessage
                                                                               name="username"
@@ -90,7 +95,7 @@ export default function Login() {
                                                                               type="password"
                                                                               name="password"
                                                                               placeholder="Password"
-                                                                              className=" md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                              className="text-white md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
                                                                         />
                                                                         <ErrorMessage
                                                                               name="password"

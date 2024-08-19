@@ -18,3 +18,22 @@ export interface UserState {
     email: string;
     avatar?: string;
 }
+
+export interface UserState {
+    id: number;
+    username: string;
+    email: string;
+    avatar?: string;
+}
+
+export interface CreateEvent {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    date : number;
+    location : string;
+    seat : number;
+    image : string;
+    category :string;
+}

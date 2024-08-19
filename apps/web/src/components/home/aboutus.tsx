@@ -5,6 +5,7 @@ import { SiEsbuild } from "react-icons/si";
 import { IoMdMegaphone } from "react-icons/io";
 import { GiReceiveMoney } from "react-icons/gi";
 
+
 export default function AboutUs() {
     return (
         <div >
@@ -24,8 +25,8 @@ export default function AboutUs() {
                                 EventUs is a comprehensive platform for organizing and promoting event, conferences, and other industry-related gathering. We provide users to create events with special concepts such as attractive, interactive promotions, and can be profitable for various parties, especially for event enthusiasts.
                             </p>
                             <div className="pt-10 pb-10 w-full">
-                                <h3 className="font-semibold text-center lg:text-start text-secondary text-xl">BENEFIT OF CHOOSING EVENTUS</h3>
-                                <div className="pt-5 w-1/2 flex pl-7 lg:w-1/2">
+                                <h3 className="font-semibold text-center text-secondary text-xl">BENEFIT OF CHOOSING EVENTUS</h3>
+                                <div className="pt-5 w-1/2 flex pl-[50%] justify-center lg:w-1/2">
                                     <div className="py-2 px-3 border border-solid border-secondary text-center">
                                         <TbWorldHeart size={50} className="text-secondary pl-2" />
                                         <p className="text-secondary text-[11px]">Global Network</p>
@@ -51,5 +52,3 @@ export default function AboutUs() {
         </div>
     )
 }
-
-// tsc && cp -r src/templates dist MAC windoes : xcopy /s /e src/templates dist
