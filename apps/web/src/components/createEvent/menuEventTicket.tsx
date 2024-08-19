@@ -85,7 +85,7 @@ export default function MenuEventTicket() {
                     <div onClick={HandleOpen} className="avatar cursor-pointer">
                         <button className="text-secondary py-3 px-[83px] pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">
                             Create New Event
-                            </button>
+                        </button>
                     </div>
                 </div>
                 <div>
@@ -101,10 +101,10 @@ export default function MenuEventTicket() {
                                 action.resetForm()
                             }}
                         >
-                            {(props: FormikProps<FormEventTicket>) => {
+                            {({ setFieldValue }) => {
                                 return (
                                     <Form>
-                        <h1 className='text-secondary font-bold text-center text-[30px]'>CREATE <span className="text-third">EVENT TICKET</span></h1>
+                                        <h1 className='text-secondary font-bold text-center text-[30px]'>CREATE <span className="text-third">EVENT TICKET</span></h1>
                                         <div className="pb-5 p-4">
                                             <div className="pb-5">
                                                 <p className="text-sm text-white">Event Poster</p>
@@ -155,8 +155,16 @@ export default function MenuEventTicket() {
                                                 </div>
                                                 <div className="lg:pt-5">
                                                     <p className="text-white font-normal text-sm pb-[6px]">Date Event</p>
-                                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date!)}
-                                                        className="bg-white rounded-lg text-primary py-1 p-2" />
+                                                    <Field
+                                                        type="date"
+                                                        name="date"
+                                                        className='bg-secondary rounded-lg text-black py-1 p-2' />
+                                                    
+                                                    <ErrorMessage
+                                                        name="date"
+                                                        component={'div'}
+                                                        className="text-xs text-red-700"
+                                                    />
                                                 </div>
                                                 <div className="lg:pt-5">
                                                     <p className="text-white font-normal text-sm">Visitor Quota</p>
@@ -172,7 +180,7 @@ export default function MenuEventTicket() {
                                                                 component={'div'}
                                                                 className="text-xs text-red-700"
                                                             />
-                                                        </div>``
+                                                        </div>
                                                         {/* <div>
                                                             <div className="rotate-180">
                                                                 <button onClick={plus}><FaRegCaretSquareDown className="text-white hover:text-third" /></button>
@@ -187,6 +195,7 @@ export default function MenuEventTicket() {
                                                 <textarea
                                                     name="location"
                                                     className="w-full h-[32px] p-1 text-white text-[14px] rounded-lg bg-transparent border border-solid resize-none"
+                                                    onChange={(e) => setFieldValue("location", e.target.value)}
                                                 />
                                                 <ErrorMessage
                                                     name="location"
@@ -197,11 +206,12 @@ export default function MenuEventTicket() {
                                             <div className="pt-5">
                                                 <p className="text-white text-sm">Description Event</p>
                                                 <textarea
-                                                    name="location"
+                                                    name="description"
                                                     className="w-full min-h-24 p-3 text-white text-[14px] rounded-xl bg-transparent border border-solid resize-none"
+                                                    onChange={(e) => setFieldValue("description", e.target.value)}
                                                 />
                                                 <ErrorMessage
-                                                    name="location"
+                                                    name="description"
                                                     component={'div'}
                                                     className="text-xs text-red-700"
                                                 />
