@@ -1,7 +1,9 @@
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+
 import Image from "next/image";
 import MenuAvatarUser from "./menuAvatarUser";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/navbar";
+import Link from "next/link";
 
 export default function NavbarUser() {
     return (

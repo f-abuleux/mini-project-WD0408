@@ -2,8 +2,8 @@ import { UserController } from "@/controllers/user.controller";
 import { Router } from "express";
 
 export class UserRouter {
-      private router : Router;
-      private userController : UserController
+      private router: Router;
+      private userController: UserController
 
       constructor() {
             this.userController = new UserController();
@@ -13,7 +13,7 @@ export class UserRouter {
 
       private initializeRoutes(): void {
             this.router.get("/", this.userController.getUserData)
- 
+
       }
 
       getRouter(): Router {

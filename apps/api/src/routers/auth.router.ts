@@ -1,4 +1,5 @@
 import { AuthController } from "@/controllers/auth.controller";
+import { referalBayChecking } from "@/middlewares/referalbaychecking.middleware";
 import { Router } from "express";
 
 export class AuthRouter {
@@ -13,7 +14,7 @@ export class AuthRouter {
 
       private initializeRoutes(): void {
             this.router.post("/authuser", this.authController.createUserData)
-            this.router.post("/login", this.authController.loginUserData)
+            this.router.post("/login", referalBayChecking, this.authController.loginUserData)
             this.router.get("/verify/:token", this.authController.verifyToken)
 
       }

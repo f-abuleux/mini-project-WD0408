@@ -15,7 +15,7 @@ model User {
   username      String        @unique
   email         String        @unique
   password      String
-  referalnumber String        @default("")
+  referalnumber String       @unique  @default(uuid())
   referalcode   String        @default("")
   point         Int           @default(0)
   avatar        String?
@@ -25,15 +25,15 @@ model User {
   createdAd     DateTime      @default(now())
   Transaction   Transaction[]
   Review        Review[]
-  Referral      Referral[]
+  Point         Point?
 }
 
-model Referral {
-  id            Int    @id @default(autoincrement())
-  referalnumber String @unique
-  point         Int    @default(0)
-  user          User   @relation(fields: [userId], references: [id])
-  userId        Int
+model Point {
+  id        Int      @id @default(autoincrement())
+  point     Int     @default(0)
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 enum statusTransaction {
@@ -45,13 +45,15 @@ enum statusTransaction {
 
 model Transaction {
   id            Int               @id @default(autoincrement())
-  quantitiy     Int
-  createdAd     DateTime          @default(now())
-  totalprice    Int
-  totaldiscount Int
-  finalprice    Int
-  status        statusTransaction
+  quantitiy     Int @default(1)
+  price    Int              @default(0)
+  totaldiscount Int             @default(0)
+  finalprice    Int            @default(0)
+  status        statusTransaction @default(pending)
+  paymentlink  String
   proofpayment  String
+  createdAd     DateTime          @default(now())
+  updatedAd     DateTime          @updatedAt 
   userId        Int               @unique
   eventId       Int               @unique
   user          User              @relation(fields: [userId], references: [id])
@@ -81,20 +83,20 @@ enum category {
 
 model Event {
   id               Int            @id @default(autoincrement())
-  name             String
-  description      String
-  price            Int
+  name             String         @unique
+  description      String         @default("")
+  price            Int            @default(0)
   date             DateTime
-  location         String
-  seat             Int
+  location         String         @default("")
+  seat             Int            @default(0)
   tickettype       tickettype
-  image            String
+  image            String?
+  eventOrganizerId Int
   eventorganizer   EventOrganizer @relation(fields: [eventOrganizerId], references: [id])
-  eventOrganizerId Int            @unique
   category         category
   Promotion        Promotion?
-  Transaction      Transaction?
-  Review           Review?
+  Transaction      Transaction[]
+  Review           Review[]
 }
 
 model Promotion {
@@ -122,7 +124,7 @@ model EventOrganizer {
   phonenumber String?  @db.VarChar(15)
   isVerify    Boolean  @default(false)
   createdAd   DateTime @default(now())
-  Event       Event?
+  event       Event[]
 }
 
 // model Sample {

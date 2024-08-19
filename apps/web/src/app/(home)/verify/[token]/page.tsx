@@ -1,7 +1,6 @@
 "use client"
 
 import { verifyToken } from "@/libs/action/user"
-import { param } from "cypress/types/jquery"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -20,7 +19,7 @@ const TokenValidation = () => {
             verifyToken(params.token).then((res) => {
                   setData(res.data)
             },)
-      }, [params.token])
+      }, [])
       console.log(data)
       return (
             <div className=" flex flex-col gap-5 p-5  items-center justify-start w-svh h-[600px] bg-primary font-[normal] text-[20px] text-secondary">

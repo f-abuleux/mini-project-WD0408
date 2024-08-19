@@ -25,15 +25,15 @@ export class AuthOrganizerController {
 
                   const password = await hashPass(req.body.password)
 
-                  const createdUser = await prisma.eventOrganizer.create({ data: {...req.body, password} })
-                  const token = createToken({  id: createdUser.id, role: createdUser.role }, '365d')
+                  const createdUser = await prisma.eventOrganizer.create({ data: { ...req.body, password } })
+                  const token = createToken({ id: createdUser.id, role: createdUser.role }, '365d')
 
                   const templatePath = path.join(__dirname, '../templates', "verify.hbs")
                   const templateSource = fs.readFileSync(templatePath, 'utf-8').toString()
                   const compiledTemplate = handlebars.compile(templateSource)
-                  const html = compiledTemplate({ 
-                        username : req.body.username,
-                        link : `http://localhost:3000/verifyeventorganizer/${token}`
+                  const html = compiledTemplate({
+                        username: req.body.username,
+                        link: `http://localhost:3000/verifyeventorganizer/${token}`
                   })
                   console.log(token)
 
@@ -67,14 +67,14 @@ export class AuthOrganizerController {
                         }
                   })
                   // console.log(user)
-                  
+
                   if (!user) throw 'User not found'
                   if (!user.isVerify) throw 'User not verified'
-                  
+
                   const isValidPass = await compare(req.body.password, user.password)
                   if (!isValidPass) throw 'Incorrect password'
 
-                  const token = createToken({ id: user.id, role: user.role})
+                  const token = createToken({ id: user.id, role: user.role })
 
 
                   res.status(200).send({
@@ -91,8 +91,8 @@ export class AuthOrganizerController {
             }
       }
 
-      async verifyToken (req : Request, res : Response) {
-            const  { token } = req.params
+      async verifyToken(req: Request, res: Response) {
+            const { token } = req.params
             try {
                   jwt.verify(token, process.env.SECRET_KEY!, async (err, user) => {
                         if (err) {
@@ -108,7 +108,7 @@ export class AuthOrganizerController {
                               })
                               res.status(200).send({
                                     status: 'Success verify user',
-                                    data : { isVerified : true }
+                                    data: { isVerified: true }
                               })
                         }
                   })

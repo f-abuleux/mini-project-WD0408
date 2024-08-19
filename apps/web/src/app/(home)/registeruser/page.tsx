@@ -19,7 +19,9 @@ const signUpSchema = yup.object().shape({
             .string()
             .required("password is required")
             .min(8, "password must be at least 8 characters"),
-      referalcde: yup.string()
+      referalcde: yup
+            .string()
+            .max(13, "referal code must be 13 characters")
 });
 
 export interface ISignUpUser {
@@ -34,7 +36,7 @@ export default function SignUpUser() {
       const [user, setUser] = useState<ISignUpUser | null>(null);
 
       const initialValues: ISignUpUser = {
-            username: "", 
+            username: "",
             email: "",
             password: "",
             referalcode: ""
@@ -125,8 +127,10 @@ export default function SignUpUser() {
                                                                   <Field
                                                                         type="text"
                                                                         name="referalcode"
+
                                                                         placeholder="referalcode?"
                                                                         className="text-white md:min-w-[500px] mx-10  rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                    
                                                                   />
                                                                   <ErrorMessage
                                                                         name="referalcode"
