@@ -4,7 +4,7 @@ import { deleteCookie, getCookie } from "./libs/action/server";
 
 //TAMBAH URL YANG INGIN DIPROTEKSI SEPERTI BUY NOW
 
-const protectPages = ["/beranda"]
+const protectPages = ["/home", ]
 
 
 export function middleware(request: NextRequest) {
@@ -15,11 +15,11 @@ export function middleware(request: NextRequest) {
       const url = request.nextUrl.pathname
 
       if (token && url === "/loginuser") {
-            return NextResponse.redirect(new URL("/beranda", request.url))
+            return NextResponse.redirect(new URL("/home", request.url))
       }
 
       if (token && url === "/loginorganizer") {
-            return NextResponse.redirect(new URL("/beranda", request.url))
+            return NextResponse.redirect(new URL("/home", request.url))
       }
 
       if (protectPages.includes(url)) {
@@ -28,5 +28,7 @@ export function middleware(request: NextRequest) {
 
             }
       }
+
+
       return NextResponse.next()
 }
