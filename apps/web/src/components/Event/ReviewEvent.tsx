@@ -9,20 +9,20 @@ import { props } from "cypress/types/bluebird";
 
 //Setingan Formik
 
-interface PostReview {
-    review: string,
-    rating-2: string
-}
+// interface PostReview {
+//     review: string,
+//     rating-2: string
+// }
 
-const validationSchema = yup.object().shape({
-    review: yup.string().required("write your review!")
-    rating-2: yup.string().required("Please fill in the rating!")
-})
+// const validationSchema = yup.object().shape({
+//     review: yup.string().required("write your review!")
+//     rating-2: yup.string().required("Please fill in the rating!")
+// })
 
-const initialValues: PostReview = {
-    review: ""
-    rating-2:""
-}
+// const initialValues: PostReview = {
+//     review: ""
+//     rating-2:""
+// }
 
 export default function ReviewEvent() {
     return (
@@ -31,7 +31,7 @@ export default function ReviewEvent() {
                 <h1 className="font-bold text-xl text-secondary">Review</h1>
                 <div className="pt-10">
 
-                    <Formik
+                    {/* <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
                         onSubmit={(value, action) => {
@@ -39,7 +39,7 @@ export default function ReviewEvent() {
                             action.resetForm
                         }}
                     > {({ errors, dirty, isSubmitting }) => {
-                        return (
+                        return ( */}
                             <div className="flex gap-3">
                                 <div>
                                     <div className="avatar cursor-pointer">
@@ -86,14 +86,14 @@ export default function ReviewEvent() {
                                 <div className="flex justify-end pt-10 pb-3">
                                     <button 
                                     type="submit" 
-                                    disabled={!!errors.rating-2 || !!errors.review || !dirty}
+                                    // disabled={!!errors.rating-2 || !!errors.review || !dirty}
                                     className="text-primary font-semibold py-2 px-[80px] rounded-full disabled:bg-gray-500 bg-secondary hover:bg-gradient-to-l from-third to-third transition duration-100 ease-in-out hover:text-white"
                                     >Post</button>
                                 </div>
                             </div>
-                         )
+                         {/* )
                     }}
-                    </Formik>
+                    </Formik> */}
                 </div>
             </div>
         </div >
