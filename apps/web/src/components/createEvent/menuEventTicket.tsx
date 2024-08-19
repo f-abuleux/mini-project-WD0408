@@ -46,10 +46,10 @@ export default function MenuEventTicket() {
 
     interface FormEventTicket {
         image: string,
-        eventName: string,
-        categoryEvent: string,
-        dateEvent: string,
-        quota: string,
+        name: string,
+        category: string,
+        date: string,
+        seat: string,
         location: string,
         description: string,
         price: string
@@ -58,9 +58,9 @@ export default function MenuEventTicket() {
 
     const validationSchema = yup.object().shape({
         image: yup.string().required("required fields"),
-        eventName: yup.string().required("required fields"),
-        dataEvent: yup.string().required("required fields"),
-        quota: yup.string().required("required fields"),
+        name: yup.string().required("required fields"),
+        date: yup.string().required("required fields"),
+        seat: yup.string().required("required fields"),
         location: yup.string().required("required fields"),
         description: yup.string().required("required fields"),
         price: yup.string().required("required fields")
@@ -69,10 +69,10 @@ export default function MenuEventTicket() {
 
     const initialValues: FormEventTicket = {
         image: "",
-        eventName: "",
-        categoryEvent: "",
-        dateEvent: "",
-        quota: "",
+        name: "",
+        category: "",
+        date: "",
+        seat: "",
         location: "",
         description: "",
         price: ""
@@ -83,7 +83,9 @@ export default function MenuEventTicket() {
             <div className="relative">
                 <div>
                     <div onClick={HandleOpen} className="avatar cursor-pointer">
-                        <button className="text-secondary py-3 px-[83px] pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">Create New Event</button>
+                        <button className="text-secondary py-3 px-[83px] pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">
+                            Create New Event
+                            </button>
                     </div>
                 </div>
                 <div>
@@ -91,18 +93,18 @@ export default function MenuEventTicket() {
                         <div className="flex justify-center pb-5">
                             <Image src="/Logo-minpro.png" alt="Logo" width={70} height={70} className='' />
                         </div>
-                        <h1 className='text-secondary font-bold text-center text-[30px]'>CREATE <span className="text-third">EVENT TICKET</span></h1>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
                             onSubmit={(value, action) => {
                                 alert(JSON.stringify(value))
-                                action.resetForm
+                                action.resetForm()
                             }}
                         >
-                            {() => {
+                            {(props: FormikProps<FormEventTicket>) => {
                                 return (
-                                    <From>
+                                    <Form>
+                        <h1 className='text-secondary font-bold text-center text-[30px]'>CREATE <span className="text-third">EVENT TICKET</span></h1>
                                         <div className="pb-5 p-4">
                                             <div className="pb-5">
                                                 <p className="text-sm text-white">Event Poster</p>
@@ -114,7 +116,7 @@ export default function MenuEventTicket() {
                                                     />
                                                     <ErrorMessage
                                                         name="image"
-                                                        component='div'
+                                                        component={'div'}
                                                         className="text-xs text-red-700"
                                                     />
                                                 </div>
@@ -123,12 +125,12 @@ export default function MenuEventTicket() {
                                                 <p className="text-sm text-white">Event Name</p>
                                                 <Field
                                                     type="text"
-                                                    name="eventName"
+                                                    name="name"
                                                     className="py-3 p-2 w-full rounded-md bg-transparent border border-solid border-white text-white "
                                                 />
                                                 <ErrorMessage
-                                                    name="eventName"
-                                                    component='div'
+                                                    name="name"
+                                                    component={'div'}
                                                     className="text-xs text-red-700"
                                                 />
                                             </div>
@@ -138,7 +140,7 @@ export default function MenuEventTicket() {
                                                     <Field
                                                         as="select"
                                                         id="Category"
-                                                        name="categoryEvent"
+                                                        name="category"
                                                         className="bg-white text-primary pr-10 text-center rounded-md py-[6px] px-[10px]">
                                                         <option selected className="text-gray-200">Category</option>
                                                         <option value="Music">Music</option>
@@ -146,8 +148,8 @@ export default function MenuEventTicket() {
                                                         <option value="Games">Games</option>
                                                     </Field>
                                                     <ErrorMessage
-                                                        name="categoryEvent"
-                                                        component='div'
+                                                        name="category"
+                                                        component={'div'}
                                                         className="text-xs text-red-700"
                                                     />
                                                 </div>
@@ -160,15 +162,23 @@ export default function MenuEventTicket() {
                                                     <p className="text-white font-normal text-sm">Visitor Quota</p>
                                                     <div className="flex gap-3">
                                                         <div className="pt-2">
-                                                            <p className="w-[50px] h-[30px] p-1 text-center text-primary text-[14px] rounded-md bg-white border border-solid resize-none"
-                                                            >{qty}</p>
-                                                        </div>
-                                                        <div>
+                                                            <Field
+                                                                type="number"
+                                                                name="seat"
+                                                                className="w-[50px] h-[30px] p-1 text-center text-primary text-[14px] rounded-md bg-white border border-solid resize-none"
+                                                            />
+                                                            <ErrorMessage
+                                                                name="seat"
+                                                                component={'div'}
+                                                                className="text-xs text-red-700"
+                                                            />
+                                                        </div>``
+                                                        {/* <div>
                                                             <div className="rotate-180">
                                                                 <button onClick={plus}><FaRegCaretSquareDown className="text-white hover:text-third" /></button>
                                                             </div>
                                                             <button onClick={min}><FaRegCaretSquareDown className="text-white hover:text-third" /></button>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,7 +190,7 @@ export default function MenuEventTicket() {
                                                 />
                                                 <ErrorMessage
                                                     name="location"
-                                                    component='div'
+                                                    component={'div'}
                                                     className="text-xs text-red-700"
                                                 />
                                             </div>
@@ -189,6 +199,11 @@ export default function MenuEventTicket() {
                                                 <textarea
                                                     name="location"
                                                     className="w-full min-h-24 p-3 text-white text-[14px] rounded-xl bg-transparent border border-solid resize-none"
+                                                />
+                                                <ErrorMessage
+                                                    name="location"
+                                                    component={'div'}
+                                                    className="text-xs text-red-700"
                                                 />
                                             </div>
                                             <div className="pt-5">
@@ -199,15 +214,17 @@ export default function MenuEventTicket() {
                                                     className="py-2 p-2 w-full rounded-md bg-transparent border border-solid border-white text-white " />
                                                 <ErrorMessage
                                                     name="price"
-                                                    component='div'
+                                                    component={'div'}
                                                     className="text-xs text-red-700"
                                                 />
                                             </div>
                                             <div className="pt-10">
-                                                <button className="py-3 px-1 bg-white rounded-lg w-full text-primary hover:bg-gradient-to-l from-purple-700 to-purple-700 hover:text-white">Create Event Ticket</button>
+                                                <button
+                                                    type="submit"
+                                                    className="py-3 px-1 bg-white rounded-lg w-full text-primary hover:bg-gradient-to-l from-purple-700 to-purple-700 hover:text-white">Create Event Ticket</button>
                                             </div>
                                         </div>
-                                    </From>
+                                    </Form>
                                 )
                             }}
                         </Formik>
