@@ -93,12 +93,12 @@ export default function EventPresent() {
                         </select>
                     </div>
                 </div>
-                <div className=" flex flex-wrap justify-center pb-5 p-5 lg:pt-10">
+                <div className=" flex flex-wrap justify-center p-5 lg:pt-10">
                     <CardEventHome />
                     <CardEventHome />
                     <CardEventHome />
                 </div>
-                <div>
+                <div className="pb-10">
                     <Pagination />
                 </div>
                 <div className="p-20 flex flex-wrap gap-32 justify-center">

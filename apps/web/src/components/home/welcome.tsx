@@ -21,7 +21,7 @@ export default function ContentWelcome() {
                 <Image src="/bg4.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:hidden lg:hidden" />
                 <Image src="/bg2.png" alt="Background" width={1440} height={100} className="absolute opacity-60" />
                 </div>
-                <div className="w-full lg:justify-center p-5 relative pt-36">
+                <div className="w-full lg:justify-center p-5 relative pt-48 lg:pt-36">
                     <div className="pb-10 text-center lg:px-52 lg:pt-20">
                         <h1 className="text-white text-3xl lg:text-4xl font-semibold pb-5">
                             The Ultimate Platform for Planning and Promoting<span className="text-third"> Successful Events</span>
@@ -38,10 +38,10 @@ export default function ContentWelcome() {
                         <FaWindows size={25} className="text-secondary" />
                         <FaInstagram size={25} className="text-secondary" />
                     </div>
-                    <div className="flex justify-center gap-10">
-                        <Link href="/#AboutUs" className="text-white text-sm flex justify-center font-semibold py-2 px-3 border border-solid border-secondary rounded-full hover:text-third">See more About Us</Link>
-                        <Link href="/#SeeEvent" className="text-white text-sm flex justify-center font-semibold py-2 px-3 border border-solid border-secondary rounded-full hover:text-third">See more Event</Link>
-                        <Link href="/create" target="_blank" className="text-white text-sm bg-gradient-to-l from-third to-primary flex justify-center font-semibold py-2 px-5 border border-solid border-secondary rounded-full hover:text-third">Create Event</Link>
+                    <div className="flex justify-center gap-6 lg:gap-10">
+                        <Link href="/#AboutUs" className="text-white text-center text-sm flex justify-center font-semibold py-2 px-3 border border-solid border-secondary rounded-full hover:text-third">See more About Us</Link>
+                        <Link href="/#SeeEvent" className="text-white text-center text-sm flex justify-center font-semibold py-2 px-3 border border-solid border-secondary rounded-full hover:text-third">See more Event</Link>
+                        <Link href="/create" target="_blank" className="text-white text-center text-sm bg-gradient-to-l from-third to-primary flex justify-center font-semibold py-2 px-5 border border-solid border-secondary rounded-full hover:text-third">Create Event</Link>
                     </div>
                 </div>
             </div>

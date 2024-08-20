@@ -33,3 +33,33 @@
     }
 }
 
+.loading {
+    width: 100px;
+    height: 100px;
+    display: grid;
+}
+.loading::before,
+.loading::after {    
+    content:"";
+    grid-area: 1/1;
+    --c: radial-gradient(farthest-side,#b990d0 92%,#0000);
+    background: 
+      var(--c) 50%  0, 
+      var(--c) 50%  100%, 
+      var(--c) 100% 50%, 
+      var(--c) 0    50%;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    animation: s2 1s infinite;
+}
+.loading::before {
+  margin:8px;
+  filter:hue-rotate(45deg);
+  background-size: 16px 16px;
+  animation-timing-function: linear
+}
+
+@keyframes s2{ 
+  100%{transform: rotate(.5turn)}
+}
+

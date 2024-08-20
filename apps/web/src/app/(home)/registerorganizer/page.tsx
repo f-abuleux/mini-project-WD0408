@@ -30,9 +30,9 @@ export interface ISignUpOrganizer {
 
 export default function SignUpOrganizer() {
 
-      const initialValues: ISignUpOrganizer = { 
-            username: "", 
-            email: "", 
+      const initialValues: ISignUpOrganizer = {
+            username: "",
+            email: "",
             password: ""
       };
 
@@ -48,25 +48,18 @@ export default function SignUpOrganizer() {
 
 
       return (
-            <div className="bg-primary " id="#registerorganizer">
-                  <div className="flex justify-center">
+            <div className="bg-gradient-to-b from-primary to-primary to-20% " id="#registerorganizer">
+                  <Image src="/bg8.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[1440px]" />
+                  <div className="flex justify-center relative pt-10">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"
                         />
                   </div>
-                  <div className="flex flex-col sm:flex-row h-svh justify-center items-center">
-                        <div className="p-5">
-                        <Image
-                                    src="/photo/1concert.jpg"
-                                    alt="hero"
-                                    width={600}
-                                    height={600}
-                                    className="mb-10 sm:mb-48 shadow-lg border-[1px] rounded-[20px]"
-                              />
-                        </div>
+                  <div className="flex flex-col sm:flex-row h-svh justify-center items-center relative pt-14">
+                        
                         <div className="mb-40 flex flex-col">
-                              
-                              <h1 className="font-bold  mx-10 font-[bold] text-[28px] text-secondary p-1">BE EVENT ORGANIZER!</h1>
+
+                              <h1 className="font-bold  mx-10 font-[bold] text-[28px] text-center text-secondary p-1">BE EVENT <span className="text-third">ORGANIZER!</span></h1>
                               <Formik
                                     initialValues={initialValues}
                                     validationSchema={signUpSchema}
@@ -80,14 +73,14 @@ export default function SignUpOrganizer() {
                                           return (
                                                 <div className="my-6">
                                                       <Form>
-                                                            <div className="flex flex-col gap-5 items-center">
-                                                            <p className="text-secondary text-[12px] mr-[400px] font-[normal]">continue as <Link href="/registeruser" className="text-third hover:font-[bold] hover:text-secondary duration-300 font-[normal]">user</Link></p>
+                                                            <div className="flex flex-col justify-center gap-5 items-center">
+                                                                  <p className="text-secondary text-[16px] font-[normal] text-center">continue as <Link href="/registeruser" className="text-third hover:font-[bold] hover:text-secondary duration-300 font-[normal] underline">User</Link></p>
                                                                   <div>
                                                                         <Field
                                                                               type="text"
                                                                               name="username"
                                                                               placeholder="Username"
-                                                                              className="md:min-w-[500px] mx-10  rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                              className="md:min-w-[500px] mx-10 text-white  rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
                                                                         />
                                                                         <ErrorMessage
                                                                               name="username"
@@ -100,7 +93,7 @@ export default function SignUpOrganizer() {
                                                                               type="text"
                                                                               name="email"
                                                                               placeholder="Email"
-                                                                              className="md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                              className="md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] text-white border-gray-400 focus:outline-none"
                                                                         />
                                                                         <ErrorMessage
                                                                               name="email"
@@ -113,7 +106,7 @@ export default function SignUpOrganizer() {
                                                                               type="password"
                                                                               name="password"
                                                                               placeholder="Password"
-                                                                              className=" md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] border-gray-400 focus:outline-none"
+                                                                              className=" md:min-w-[500px] mx-10 rounded-full pl-5 pr-10 py-3 border-[1px] text-white border-gray-400 focus:outline-none"
                                                                         />
                                                                         <ErrorMessage
                                                                               name="password"
