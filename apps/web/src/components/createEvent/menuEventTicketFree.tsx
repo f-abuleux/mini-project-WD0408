@@ -216,7 +216,7 @@ export default function MenuEventTicket() {
                                             <div className="pt-10">
                                                 <button
                                                     type="submit"
-                                                    className="py-3 px-1 bg-white rounded-lg w-full text-primary hover:bg-gradient-to-l from-purple-700 to-purple-700 hover:text-white">Create Event Ticket</button>
+                                                    className="py-3 px-1 bg-white rounded-lg w-full text-primary hover:bg-gradient-to-l from-purple-700 to-purple-700 hover:text-white">Create Free Event</button>
                                             </div>
                                         </div>
                                     </Form>

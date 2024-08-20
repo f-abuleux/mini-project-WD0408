@@ -7,12 +7,12 @@ export default function ViewEvent() {
         <div>
             <div className="w-full bg-gradient-to-b from-primary to-primary to-20%">
                 <Image src="/bgviewevent.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[1400px]" />
-                <div className="relative flex justify-center pt-[150px]">
-                    <div className="w-full lg:w-[900px]">
+                <div className="relative flex justify-center pt-10 lg:pt-[150px]">
+                    <div className="w-full p-5 lg:w-[900px]">
                         <div className="rounded-xl overflow-hidden">
                             <Image src="/event1.jpg" alt="Background" width={800} height={100} className=" md:w-auto lg:w-[900px]" />
                         </div>
-                        <div className="flex gap-5  ">
+                        <div className="flex flex-wrap lg:flex-nowrap justify-center gap-5">
                             <div className="py-10 px[100px] w-[600px]">
                                 <h3><Link href="/" className="font-semibold text-third text-3xl hover:text-secondary">Event Name</Link></h3>
                                 <h4 className="font-semibold text-secondary pb-3 pt-5">About Event</h4>
@@ -37,7 +37,9 @@ export default function ViewEvent() {
                                                 <h4 className="font-semibold text-secondary pb-2"><span></span>Tanggal Event</h4>
                                                 <h4 className="font-semibold text-secondary pb-10">Location</h4>
                                                 <div className="flex gap-5 justify-center pt-[100px] pb-3">
-                                                    <Link href="/checkout" className="text-primary font-semibold py-2 px-[80px] rounded-full bg-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out hover:text-white">Buy Ticket</Link>
+                                                    <Link 
+                                                    href="/checkout" 
+                                                    className="text-primary font-semibold py-2 px-[80px] rounded-full bg-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out hover:text-white">Buy Ticket</Link>
                                                 </div>
                                             </div>
                                         </div>
