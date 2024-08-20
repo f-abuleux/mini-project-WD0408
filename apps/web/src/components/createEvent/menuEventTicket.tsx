@@ -11,10 +11,26 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps, useFormi
 import { CreateEvent } from "@/types/eo";
 import { Input } from "@nextui-org/react";
 import * as yup from "yup";
+import { RiGalleryUploadFill } from "react-icons/ri";
+import ImagePreview from "./imagePreview";
+import { values } from "cypress/types/lodash";
 
 // import { useAppSelector } from '@/redux/hooks';
 
-export default function MenuEventTicket() {
+
+export default function MenuEventTicket () {
+
+    
+    const mediaRef = useRef<HTMLInputElement | null>(null);
+
+    const handleFileChange = (event: any, setFieldValue: any) => {
+        const file = event.target.files[0]
+        console.log(file);
+        
+        if (file) {
+            setFieldValue('image', file)
+        }
+    }
 
     // SETTINGAN MODAL
     const [ModalOpen, setModalOpen] = useState(false)
@@ -45,7 +61,7 @@ export default function MenuEventTicket() {
     // SETTINGAN FORMIK
 
     interface FormEventTicket {
-        image: string,
+        image: File | null,
         name: string,
         category: string,
         date: string,
@@ -53,7 +69,6 @@ export default function MenuEventTicket() {
         location: string,
         description: string,
         price: string
-
     }
 
     const validationSchema = yup.object().shape({
@@ -68,14 +83,14 @@ export default function MenuEventTicket() {
     })
 
     const initialValues: FormEventTicket = {
-        image: "",
+        image: null,
         name: "",
         category: "",
         date: "",
         seat: "",
         location: "",
         description: "",
-        price: ""
+        price: "",
     }
 
     return (
@@ -101,7 +116,7 @@ export default function MenuEventTicket() {
                                 action.resetForm()
                             }}
                         >
-                            {({ setFieldValue }) => {
+                            {({setFieldValue, values}) => {
                                 return (
                                     <Form>
                                         <h1 className='text-secondary font-bold text-center text-[30px]'>CREATE <span className="text-third">EVENT TICKET</span></h1>
@@ -109,10 +124,19 @@ export default function MenuEventTicket() {
                                             <div className="pb-5">
                                                 <p className="text-sm text-white">Event Poster</p>
                                                 <div className="py-20 px-5 border border-solid border-white rounded-md">
-                                                    <Field
+                                                    <label htmlFor="upload" className="text-center">
+                                                        <div className="flex justify-center">
+                                                            <RiGalleryUploadFill size={40} className="text-third cursor-pointer hover:text-white" />
+                                                        </div>
+                                                        <p className="text-white">Upload Your Poster Event</p>
+                                                    </label>
+                                                    <ImagePreview image={values.image} setFieldValue={setFieldValue} mediaRef={mediaRef} />
+                                                    <input
+                                                        onChange={(e : any) => handleFileChange(e, setFieldValue)}
                                                         type="file"
+                                                        id="upload"
                                                         name="image"
-                                                        className="p-2 w-full rounded-md bg-transparent"
+                                                        className="hidden"
                                                     />
                                                     <ErrorMessage
                                                         name="image"
@@ -159,7 +183,7 @@ export default function MenuEventTicket() {
                                                         type="date"
                                                         name="date"
                                                         className='bg-secondary rounded-lg text-black py-1 p-2' />
-                                                    
+
                                                     <ErrorMessage
                                                         name="date"
                                                         component={'div'}

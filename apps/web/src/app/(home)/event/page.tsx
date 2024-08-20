@@ -1,5 +1,5 @@
 import CardReviewUser from "@/components/Event/CardReviewUser";
-import ReviewEvent from "@/components/Event/ReviewEvent";
+import CreateReview from "@/components/Event/CreateReview";
 import ViewEvent from "@/components/Event/ViewEvent";
 import NavbarUser from "@/components/navbar/Navbar.User";
 import { Metadata } from "next";
@@ -14,7 +14,7 @@ export default function PageEvent () {
         <div>
             <NavbarUser />
             <ViewEvent />
-            <ReviewEvent />
+            <CreateReview />
             <CardReviewUser />
         </div>
     )

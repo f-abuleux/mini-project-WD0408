@@ -54,7 +54,7 @@ export default function CreateEvent() {
                                 <h3 className="font-semibold text-secondary">- Description</h3>
                                 <h3 className="font-semibold text-secondary">- Seat</h3>
                                 <h3 className="font-semibold text-secondary">- Image</h3>
-                                <div className="pt-10">
+                                <div className="pt-[55px]">
                                     <MenuEventTicketFree />
                                 </div>
                             </div>
