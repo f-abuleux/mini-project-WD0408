@@ -24,7 +24,7 @@ const initialValues: PostReview = {
     ratings: ""
 }
 
-export default function ReviewEvent() {
+export default function CreateReview() {
     return (
         <div>
             <div className="w-full lg:pr-[17%] bg-primary lg:pt-10 lg:pl-[240px] p-5">
