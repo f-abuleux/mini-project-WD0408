@@ -4,7 +4,7 @@ CREATE TABLE `User` (
     `username` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
-    `referalnumber` VARCHAR(191) NOT NULL,
+    `referalnumber` VARCHAR(191) NULL,
     `referalcode` VARCHAR(191) NOT NULL DEFAULT '',
     `point` INTEGER NOT NULL DEFAULT 0,
     `avatar` VARCHAR(191) NULL,
@@ -45,8 +45,6 @@ CREATE TABLE `Transaction` (
     `userId` INTEGER NOT NULL,
     `eventId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `Transaction_userId_key`(`userId`),
-    UNIQUE INDEX `Transaction_eventId_key`(`eventId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

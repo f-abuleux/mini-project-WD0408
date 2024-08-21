@@ -15,7 +15,7 @@ model User {
   username      String        @unique
   email         String        @unique
   password      String
-  referalnumber String       @unique  @default(uuid())
+  referalnumber String        @unique @default(uuid())
   referalcode   String        @default("")
   point         Int           @default(0)
   avatar        String?
@@ -23,14 +23,14 @@ model User {
   phonenumber   String?       @db.VarChar(15)
   isVerify      Boolean       @default(false)
   createdAd     DateTime      @default(now())
-  Transaction   Transaction[]
-  Review        Review[]
   Point         Point?
+  Transaction   Transaction[]
+  Review        Review?
 }
 
 model Point {
   id        Int      @id @default(autoincrement())
-  point     Int     @default(0)
+  point     Int      @default(0)
   userId    Int      @unique
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
@@ -45,17 +45,17 @@ enum statusTransaction {
 
 model Transaction {
   id            Int               @id @default(autoincrement())
-  quantitiy     Int @default(1)
-  price    Int              @default(0)
-  totaldiscount Int             @default(0)
-  finalprice    Int            @default(0)
+  quantitiy     Int               @default(1)
+  price         Int               @default(0)
+  totaldiscount Int               @default(0)
+  finalprice    Int               @default(0)
   status        statusTransaction @default(pending)
-  paymentlink  String
+  paymentlink   String
   proofpayment  String
   createdAd     DateTime          @default(now())
-  updatedAd     DateTime          @updatedAt 
-  userId        Int               @unique
-  eventId       Int               @unique
+  updatedAd     DateTime          @updatedAt
+  userId        Int
+  eventId       Int
   user          User              @relation(fields: [userId], references: [id])
   event         Event             @relation(fields: [eventId], references: [id])
 }
@@ -95,8 +95,8 @@ model Event {
   eventorganizer   EventOrganizer @relation(fields: [eventOrganizerId], references: [id])
   category         category
   Promotion        Promotion?
-  Transaction      Transaction[]
   Review           Review[]
+  Transaction      Transaction[]
 }
 
 model Promotion {

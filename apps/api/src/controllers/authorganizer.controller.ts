@@ -74,7 +74,7 @@ export class AuthOrganizerController {
                   const isValidPass = await compare(req.body.password, user.password)
                   if (!isValidPass) throw 'Incorrect password'
 
-                  const token = createToken({ id: user.id, role: user.role })
+                  const token = createToken({ id: user.id, role: user.role }, "1d")
 
 
                   res.status(200).send({

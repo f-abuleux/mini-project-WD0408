@@ -6,10 +6,10 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Metadata } from "next";
 
-export const metadata:Metadata = {
-      title: 'Verify / EventUs',
-      description: 'Verify EventUs'
-  }
+// export const metadata:Metadata = {
+//       title: 'Verify / EventUs',
+//       description: 'Verify EventUs'
+//   }
 
 const TokenValidation = () => {
       const params = useParams<{ token: string }>()

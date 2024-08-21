@@ -16,14 +16,16 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
 
             //token masih valid atau tidak
 
-            verify(token, process.env.SECRET_KEY!, (err: any, user: any) => {
-                  if (err) return res.status(403).json({ message: 'Forbidden' });
-                  next();
-            })
-            // req.user = user as User
-            // console.log(user)
-            // console.log(token)
-            // next()
+            const user =  verify(token, process.env.SECRET_KEY!)
+
+            // verify(token, process.env.SECRET_KEY!, (err: any, user: any) => {
+            //       if (err) return res.status(403).json({ message: 'Forbidden' });
+            //       next();
+            // })
+            req.user = user as User
+            console.log(user)
+            console.log(token)
+            next()
       } catch (error) {
             res.status(400).send({
                   status: 'error',

@@ -57,13 +57,13 @@ export default function MenuEventTicket() {
     }
 
     const validationSchema = yup.object().shape({
-        image: yup.string().required("required fields"),
-        name: yup.string().required("required fields"),
-        date: yup.string().required("required fields"),
-        seat: yup.string().required("required fields"),
-        location: yup.string().required("required fields"),
-        description: yup.string().required("required fields"),
-        price: yup.string().required("required fields")
+        image: yup.string().required("required fields image"),
+        name: yup.string().required("required fields name"),
+        date: yup.string().required("required fields date"),
+        seat: yup.string().required("required fields seat"),
+        location: yup.string().required("required fields location"),
+        description: yup.string().required("required fields description"),
+        price: yup.string().required("required fields price")
 
     })
 
@@ -184,7 +184,7 @@ export default function MenuEventTicket() {
                                             </div>
                                             <div className="pt-5">
                                                 <p className="text-white text-sm">Event Location</p>
-                                                <textarea
+                                                <Field
                                                     name="location"
                                                     className="w-full h-[32px] p-1 text-white text-[14px] rounded-lg bg-transparent border border-solid resize-none"
                                                 />
@@ -196,12 +196,12 @@ export default function MenuEventTicket() {
                                             </div>
                                             <div className="pt-5">
                                                 <p className="text-white text-sm">Description Event</p>
-                                                <textarea
-                                                    name="location"
+                                                <Field
+                                                    name="description"
                                                     className="w-full min-h-24 p-3 text-white text-[14px] rounded-xl bg-transparent border border-solid resize-none"
                                                 />
                                                 <ErrorMessage
-                                                    name="location"
+                                                    name="description"
                                                     component={'div'}
                                                     className="text-xs text-red-700"
                                                 />
