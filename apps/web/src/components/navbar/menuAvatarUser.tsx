@@ -38,7 +38,7 @@ export default function MenuAvatarUser() {
                         <div className="flex flex-col">
                             <Link href="/profile" className="text-primary font-semibold text-start text-[12px] hover:text-third pb-1">Profile</Link>
                             <div className="pt-5">
-                                <button className="py-1 px-[39px] bg-primary rounded-lg text-secondary hover:text-third">Keluar</button>
+                                <button className="py-1 px-[39px] bg-primary rounded-lg text-secondary hover:text-red-400">Logout</button>
                             </div>
                         </div>
                     </ModalProfile>

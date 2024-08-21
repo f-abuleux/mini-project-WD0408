@@ -52,14 +52,15 @@ export default function SignUpUser() {
             }
       }
       return (
-            <div className="bg-primary pt-10" id="#registeruser">
-                  <div className="flex justify-center">
+            <div className="bg-gradient-to-b from-primary to-primary to-20%" id="#registeruser">
+                  <Image src="/bg6.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[1440px]" />
+                  <div className="flex justify-center relative pt-10">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"
                         />
                   </div>
-                  <div className="flex flex-col sm:flex-row h-svh justify-center items-center pt-10">
-                        <div className="p-5">
+                  <div className="flex flex-col sm:flex-row h-svh justify-center items-center pt-14 relative">
+                        {/* <div className="p-5">
                               <Image
                                     src="/photo/1concert.jpg"
                                     alt="hero"
@@ -67,9 +68,9 @@ export default function SignUpUser() {
                                     height={600}
                                     className="mb-10 sm:mb-48 shadow-lg border-[1px] rounded-[20px]"
                               />
-                        </div>
+                        </div> */}
                         <div className="mb-40 flex flex-col pt-10">
-                              <h1 className="font-bold mx-10 font-[bold] text-[28px] text-secondary p-1">CREATE YOUR ACCOUNT!</h1>
+                              <h1 className="font-bold mx-10 font-[bold] text-[28px] text-secondary text-center p-1">CREATE YOUR <span className="text-third">ACCOUNT!</span></h1>
                               <Formik
                                     initialValues={initialValues}
                                     validationSchema={signUpSchema}
@@ -84,7 +85,7 @@ export default function SignUpUser() {
                                                 <div className="my-6">
                                                       <Form>
                                                             <div className="flex flex-col gap-5 items-center">
-                                                                  <p className="text-secondary text-[12px] mr-[350px] font-[normal]">or be an <Link href="/registerorganizer" className="text-third hover:font-[bold] hover:text-secondary duration-300 font-[normal]">Event Organizer</Link></p>
+                                                                  <p className="text-secondary text-[15px]  font-[normal]">or be an <Link href="/registerorganizer" className="text-third hover:font-[bold] hover:text-secondary underline duration-300 font-[normal]">Event Organizer</Link></p>
                                                                   <div>
                                                                         <Field
                                                                               type="text"

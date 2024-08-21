@@ -19,7 +19,7 @@ export default function EventPresent() {
                     <h3 className="text-lg text-secondary pt-8 pb-5 flex justify-center lg:justify-start">- EVENT TICKET -</h3>
                     <div className="flex flex-wrap justify-center gap-10 pb-5 lg:justify-start lg:pb-0">
                         <input type="text" name="data" placeholder="Search Event Ticket" className="w-[330px] py-1 px-3 rounded-md bg-transparent text-secondary border border-solid border-secondary text-start" />
-                        <select id="Month" className="bg-white text-primary pr-10 text-center rounded-md">
+                        {/* <select id="Month" className="bg-white text-primary pr-10 text-center rounded-md">
                             <option selected className="text-gray-500">Mouth</option>
                             <option value="January">January</option>
                             <option value="Feburary">February</option>
@@ -41,7 +41,7 @@ export default function EventPresent() {
                             <option value="Yogyakarta">Yogyakarta</option>
                             <option value="Semarang">Semarang</option>
                             <option value="Surabaya">Surabaya</option>
-                        </select>
+                        </select> */}
                     <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
                             <option value="Category" className="text-gray-500">Category</option>
                             <option value="Film">Film</option>
@@ -62,7 +62,7 @@ export default function EventPresent() {
                     <h3 className="text-lg text-secondary pt-8 pb-5 flex justify-center lg:justify-start">- FREE EVENT -</h3>
                     <div className="flex flex-wrap justify-center gap-10 pb-5 lg:justify-start lg:pb-0">
                         <input type="text" name="data" placeholder="Search Event Ticket" className="w-[330px] py-1 px-3 rounded-md bg-transparent text-secondary border border-solid border-secondary text-start" />
-                        <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
+                        {/* <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
                             <option selected className="text-gray-500">Mouth</option>
                             <option value="January">January</option>
                             <option value="Feburary">February</option>
@@ -84,7 +84,7 @@ export default function EventPresent() {
                             <option value="Yogyakarta">Yogyakarta</option>
                             <option value="Semarang">Semarang</option>
                             <option value="Surabaya">Surabaya</option>
-                        </select>
+                        </select> */}
                         <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
                             <option value="Category" className="text-gray-500">Category</option>
                             <option value="Film">Film</option>
@@ -93,12 +93,12 @@ export default function EventPresent() {
                         </select>
                     </div>
                 </div>
-                <div className=" flex flex-wrap justify-center pb-5 p-5 lg:pt-10">
+                <div className=" flex flex-wrap justify-center p-5 lg:pt-10">
                     <CardEventHome />
                     <CardEventHome />
                     <CardEventHome />
                 </div>
-                <div>
+                <div className="pb-10">
                     <Pagination />
                 </div>
                 <div className="p-20 flex flex-wrap gap-32 justify-center">
