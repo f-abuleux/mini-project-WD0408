@@ -5,9 +5,10 @@ import { deleteCookie, getCookie } from "./libs/action/server";
 //TAMBAH URL YANG INGIN DIPROTEKSI SEPERTI BUY NOW
 
 const protectPages = ["/home", ]
+const protectPagesOrganizer = ["/create", ]
 
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
 
       // console.log("This is middleware");
       // console.log(id)
@@ -25,10 +26,14 @@ export function middleware(request: NextRequest) {
       if (protectPages.includes(url)) {
             if (!token) {
                   return NextResponse.redirect(new URL("/loginuser", request.url))
-
             }
       }
 
+      if(protectPagesOrganizer.includes(url)){
+            if(!token){
+                  return NextResponse.redirect(new URL("/loginorganizer", request.url))
+            }
+      }
 
       return NextResponse.next()
 }

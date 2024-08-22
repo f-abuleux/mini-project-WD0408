@@ -93,7 +93,6 @@ export class AuthController {
                         const currentDate = new Date();
                         const expirationDate = new Date(user.createdAd);
                         expirationDate.setMonth(expirationDate.getMonth() + 3);
-
                         if (currentDate > expirationDate) {
                               await prisma.user.update({
                                     where: { referalnumber: user.referalcode },
@@ -105,6 +104,7 @@ export class AuthController {
                               })
                         }  
                   }
+
                   res.status(200).send({
                         status: 'ok',
                         msg: 'Success login user',

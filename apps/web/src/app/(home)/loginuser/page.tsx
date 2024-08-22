@@ -33,7 +33,7 @@ export default function Login() {
                         throw result.msg
                   }
                   createCookie('token', result.token)
-                  router.push('/beranda')
+                  router.push('/home')
                   console.log(result)
                   console.log(ok)
                   toast.info(result.msg)
@@ -44,14 +44,14 @@ export default function Login() {
 
       return (
             <div className="bg-gradient-to-b from-primary to-primary to-20%" id="#loginuser">
-                  <Image src="/bg5.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[1440px]" />
+                  <Image src="/bg7.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[1440px]" />
                   <div className="flex justify-center relative pt-10">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"
                         />
                   </div>
                   <div className="flex flex-col:flex-row w-svh justify-center items-center pt-10 relative">
-                        <div className="p-5">
+                        {/* <div className="p-5">
                               <Image
                                     src="/photo/1concert.jpg"
                                     alt="hero"
@@ -59,10 +59,10 @@ export default function Login() {
                                     height={500}
                                     className=" mb-10 sm:mb-40 shadow-lg border-[1px] rounded-[20px] "
                               />
-                        </div>
-                        <div className="mb-40">
-                              <h1 className="font-bold mt-6 mb-6 mx-10 font-[bold] text-[28px] text-secondary p-1">WELCOME BACK!</h1>
-                              <p className="pl-12 text-secondary text-[12px] font-[normal]">Create your EventUs account here! <Link href="/registeruser" className="text-third hover:font-[bold] font-[normal] hover:text-secondary duration-300 ">register</Link></p>
+                        </div> */}
+                        <div className="mb-40 pt-10">
+                              <h1 className="font-bold mt-6 mb-6 mx-10 font-[bold] text-[38px] text-center text-secondary p-1">WELCOME BACK!</h1>
+                              <p className=" text-secondary text-center text-[15px] font-[normal]">Create your EventUs account here! <Link href="/registeruser" className="text-third hover:font-[bold] font-[normal] underline hover:text-secondary duration-300 ">Register</Link></p>
                               <Formik
                                     initialValues={initialValues}
                                     validationSchema={signUpSchema}

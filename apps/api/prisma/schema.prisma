@@ -62,7 +62,7 @@ model Transaction {
 
 model Review {
   id      Int    @id @default(autoincrement())
-  review  String
+  review  String 
   rating  Int    @default(0)
   userId  Int    @unique
   eventId Int    @unique

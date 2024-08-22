@@ -1,8 +1,8 @@
 export default function CardReviewUser() {
     return (
         <div>
-            <div className="w-full bg-primary pt-10 pl-[240px]">
-                <div className="pb-20">
+            <div className="w-full bg-primary pt-10 lg:pl-[240px]">
+                <div className="pb-20 p-5">
                     <div className="flex gap-3">
                         <div>
                             <div className="avatar cursor-pointer">
@@ -27,7 +27,7 @@ export default function CardReviewUser() {
                         </div>
                     </div>
                     <div className="pl-[65px]">
-                        <p className="w-[840px] p-1 text-white text-[16px]">
+                        <p className="lg:w-[840px] p-1 text-white text-[16px]">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos error tempore quam eaque iste expedita pariatur eos, neque assumenda fuga beatae quis modi repellat? Harum, recusandae officiis. Itaque, fugit tempora laborum repellat, sed ullam magni natus hic ut eos odit, odio ipsam quasi accusamus blanditiis illo. Ullam, magnam. Error, vero?
                         </p>
                     </div>

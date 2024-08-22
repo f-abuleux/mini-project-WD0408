@@ -21,7 +21,7 @@ export const Footer = () => {
                 <nav className="text-white pt-10">
                     <h6 className="font-bold text-lg text-white">Login</h6>
                     <div className="flex gap-10 pt-3">
-                        <Link href="/Beranda" className="link link-hover">User</Link>
+                        <Link href="/home" className="link link-hover">User</Link>
                         <Link href="/Tentang-Kami" className="link link-hover">Admin</Link>
                     </div>
                 </nav>

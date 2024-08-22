@@ -1,20 +1,40 @@
 "use client"
 import Image from "next/image"
 import React, { useEffect, useRef, useState } from 'react';
-import Link from "next/link";
 import ModalEventTicket from "./modal_eventpay";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import InputRupiah from "./inputRupiah";
-import { FaRegCaretSquareDown } from "react-icons/fa";
 import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps, useFormik } from "formik";
-import { CreateEvent } from "@/types/eo";
-import { Input } from "@nextui-org/react";
 import * as yup from "yup";
+import { RiGalleryUploadFill } from "react-icons/ri";
+import ImagePreview from "./imagePreview";
+import { createEventPaid } from "@/libs/action/event";
 
 // import { useAppSelector } from '@/redux/hooks';
 
+export interface FormEventTicket {
+    image: File | null,
+    name: string,
+    category: string,
+    date: string,
+    seat: string,
+    location: string,
+    description: string,
+    price: string
+}
+
 export default function MenuEventTicket() {
+
+
+    const mediaRef = useRef<HTMLInputElement | null>(null);
+
+    const handleFileChange = (event: any, setFieldValue: any) => {
+        const file = event.target.files[0]
+        console.log(file);
+
+        if (file) {
+            setFieldValue('image', file)
+        }
+    }
 
     // SETTINGAN MODAL
     const [ModalOpen, setModalOpen] = useState(false)
@@ -43,18 +63,15 @@ export default function MenuEventTicket() {
     }
 
     // SETTINGAN FORMIK
-
-    interface FormEventTicket {
-        image: string,
-        name: string,
-        category: string,
-        date: string,
-        seat: string,
-        location: string,
-        description: string,
-        price: string
-
+    const createEvent = async (data: FormEventTicket) => {
+        try {
+            const res = await createEventPaid(data)
+            console.log(res)
+        } catch (error) {
+            console.log(error)
+        }
     }
+
 
     const validationSchema = yup.object().shape({
         image: yup.string().required("required fields image"),
@@ -68,14 +85,14 @@ export default function MenuEventTicket() {
     })
 
     const initialValues: FormEventTicket = {
-        image: "",
+        image: null,
         name: "",
         category: "",
         date: "",
         seat: "",
         location: "",
         description: "",
-        price: ""
+        price: "",
     }
 
     return (
@@ -85,7 +102,7 @@ export default function MenuEventTicket() {
                     <div onClick={HandleOpen} className="avatar cursor-pointer">
                         <button className="text-secondary py-3 px-[83px] pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">
                             Create New Event
-                            </button>
+                        </button>
                     </div>
                 </div>
                 <div>
@@ -97,22 +114,33 @@ export default function MenuEventTicket() {
                             initialValues={initialValues}
                             validationSchema={validationSchema}
                             onSubmit={(value, action) => {
+                                createEvent(value)
                                 alert(JSON.stringify(value))
                                 action.resetForm()
+                                console.log(value)
                             }}
                         >
-                            {(props: FormikProps<FormEventTicket>) => {
+                            {({ setFieldValue, values }) => {
                                 return (
                                     <Form>
-                        <h1 className='text-secondary font-bold text-center text-[30px]'>CREATE <span className="text-third">EVENT TICKET</span></h1>
+                                        <h1 className='text-secondary font-bold text-center text-[30px]'>CREATE <span className="text-third">EVENT TICKET</span></h1>
                                         <div className="pb-5 p-4">
                                             <div className="pb-5">
                                                 <p className="text-sm text-white">Event Poster</p>
                                                 <div className="py-20 px-5 border border-solid border-white rounded-md">
-                                                    <Field
+                                                    <label htmlFor="upload" className="text-center">
+                                                        <div className="flex justify-center">
+                                                            <RiGalleryUploadFill size={40} className="text-third cursor-pointer hover:text-white" />
+                                                        </div>
+                                                        <p className="text-white">Upload Your Poster Event</p>
+                                                    </label>
+                                                    <ImagePreview image={values.image} setFieldValue={setFieldValue} mediaRef={mediaRef} />
+                                                    <input
+                                                        onChange={(e: any) => handleFileChange(e, setFieldValue)}
                                                         type="file"
+                                                        id="upload"
                                                         name="image"
-                                                        className="p-2 w-full rounded-md bg-transparent"
+                                                        className="hidden"
                                                     />
                                                     <ErrorMessage
                                                         name="image"
@@ -143,9 +171,9 @@ export default function MenuEventTicket() {
                                                         name="category"
                                                         className="bg-white text-primary pr-10 text-center rounded-md py-[6px] px-[10px]">
                                                         <option selected className="text-gray-200">Category</option>
-                                                        <option value="Music">Music</option>
-                                                        <option value="Film">Film</option>
-                                                        <option value="Games">Games</option>
+                                                        <option value="music">Music</option>
+                                                        <option value="film">Film</option>
+                                                        <option value="game">Games</option>
                                                     </Field>
                                                     <ErrorMessage
                                                         name="category"
@@ -155,8 +183,16 @@ export default function MenuEventTicket() {
                                                 </div>
                                                 <div className="lg:pt-5">
                                                     <p className="text-white font-normal text-sm pb-[6px]">Date Event</p>
-                                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date!)}
-                                                        className="bg-white rounded-lg text-primary py-1 p-2" />
+                                                    <Field
+                                                        type="date"
+                                                        name="date"
+                                                        className='bg-secondary rounded-lg text-black py-1 p-2' />
+
+                                                    <ErrorMessage
+                                                        name="date"
+                                                        component={'div'}
+                                                        className="text-xs text-red-700"
+                                                    />
                                                 </div>
                                                 <div className="lg:pt-5">
                                                     <p className="text-white font-normal text-sm">Visitor Quota</p>
@@ -172,7 +208,7 @@ export default function MenuEventTicket() {
                                                                 component={'div'}
                                                                 className="text-xs text-red-700"
                                                             />
-                                                        </div>``
+                                                        </div>
                                                         {/* <div>
                                                             <div className="rotate-180">
                                                                 <button onClick={plus}><FaRegCaretSquareDown className="text-white hover:text-third" /></button>
@@ -187,6 +223,7 @@ export default function MenuEventTicket() {
                                                 <Field
                                                     name="location"
                                                     className="w-full h-[32px] p-1 text-white text-[14px] rounded-lg bg-transparent border border-solid resize-none"
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFieldValue("location", e.target.value)}
                                                 />
                                                 <ErrorMessage
                                                     name="location"
@@ -196,9 +233,10 @@ export default function MenuEventTicket() {
                                             </div>
                                             <div className="pt-5">
                                                 <p className="text-white text-sm">Description Event</p>
-                                                <Field
+                                                <textarea
                                                     name="description"
                                                     className="w-full min-h-24 p-3 text-white text-[14px] rounded-xl bg-transparent border border-solid resize-none"
+                                                    onChange={(e) => setFieldValue("description", e.target.value)}
                                                 />
                                                 <ErrorMessage
                                                     name="description"
