@@ -25,13 +25,102 @@ export class TransactionController {
             try {
                   const { quantitiy, price } = req.body
                   console.log(req.user)
+
+                  const event = await prisma.event.findFirst({
+                        where: {
+                              id: req.body.eventId
+                        },
+                        select: {
+                              price: true
+                        }
+                  })
+
+                  if (!event) {
+                        res.status(400).send({
+                              status: "Failed create transaction data",
+                              msg: "Event not found"
+                        })
+                  }
+
+                  if (req.body.point) {
+                        const user = await prisma.user.findFirst({
+                              where: {
+                                    id: req.user?.id
+                              },
+                              select: {
+                                    point: true
+                              }
+                        })
+
+                        if (user?.point! < 100) {
+                              res.status(400).send({
+                                    status: "Failed create transaction data",
+                                    msg: "You don't have enough point"
+                              })
+                        }
+
+
+                        await prisma.transaction.create({
+                              data: {
+                                    quantitiy,
+                                    price: event?.price,
+                                    finalprice: (price * quantitiy - user?.point!),
+                                    userId: req.user?.id!,
+                                    eventId: Number(req.params.eventId),
+                                    paymentlink: "",
+                                    proofpayment: "",
+                              }
+                        })
+
+                        await prisma.user.update({
+                              data: {
+                                    point: {
+                                          decrement: user?.point
+                                    }
+                              },
+                              where: {
+                                    id: req.user?.id
+                              }
+                        })
+                  }
+
+                  else if (req.body.referalcode == '') {
+                        const user = await prisma.user.findFirst({
+                              where: {
+                                    referalcode: req.body.referalcode
+                              },
+                              select: {
+                                    point: true
+                              }
+                        })
+
+                        if (!user) {
+                              res.status(400).send({
+                                    status: "Failed create transaction data",
+                                    msg: "Referal code not found"
+                              })
+                        }
+
+                        await prisma.transaction.create({
+                              data: {
+                                    quantitiy,
+                                    price: event?.price,
+                                    finalprice: (price * quantitiy - (price * quantitiy * (10 / 100))),
+                                    userId: req.user?.id!,
+                                    eventId: Number(req.params.eventId),
+                                    paymentlink: "",
+                                    proofpayment: "",
+                              }
+                        })
+                  }
+
                   const transaction = await prisma.transaction.create({
                         data: {
                               quantitiy,
-                              price,
+                              price: event?.price,
                               finalprice: price * quantitiy,
                               userId: req.user?.id!,
-                              eventId: req.body.eventId,
+                              eventId: Number(req.params.eventId),
                               paymentlink: "",
                               proofpayment: "",
                         }
@@ -43,7 +132,7 @@ export class TransactionController {
                         },
                         expiry: {
                               unit: "minutes",
-                              duration: 1
+                              duration: 5
                         }
                   }
 
@@ -112,6 +201,29 @@ export class TransactionController {
                   console.log(error)
                   res.status(400).send({
                         status: "Failed update status transaction",
+                        msg: error
+                  })
+            }
+      }
+
+      async getAllTransaction(req: Request, res: Response) {
+            try {
+                  const transactionData = await prisma.transaction.findMany({
+                        where: {
+                              id: req.user?.id,
+                        },
+                        include: {
+                              user: true,
+                              event: true
+                        }
+                  })
+                  res.status(200).send({
+                        status: "Success get transaction data",
+                        data: transactionData
+                  })
+            } catch (error) {
+                  res.status(400).send({
+                        status: "Failed get transaction data",
                         msg: error
                   })
             }

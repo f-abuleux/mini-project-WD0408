@@ -4,30 +4,14 @@ import img1 from '@/app/(home)/beranda/components/eventberbayar.png';
 import img2 from '@/app/(home)/beranda/components/eventgratis.png';
 import { TbArmchair } from "react-icons/tb";
 import AvatarUserEo from "../Profile/AvatarUserProfile";
-import CardEventHome from "./CardEventHome";
+import CardEventHome from "./CardEventHomePaid";
 import Pagination from "./Pagination";
-import { getEventFree, getEventPaid } from "@/libs/action/event";
+import { Event, getEventFree, getEventPaid } from "@/libs/action/event";
+import { data } from "cypress/types/jquery";
+import CardEventHomePaid from "./CardEventHomePaid";
+import CardEventHomeFree from "./CardEventHomeFree";
 
 export default function EventPresent() {
-
-    const eventPaid = async () => {
-        try {
-            const res = await getEventPaid()
-            console.log(res)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const eventFree = async () => {
-        try {
-            const res = await getEventFree()
-            console.log(res)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
 
     return (
         <div id="SeeEvent">
@@ -72,9 +56,7 @@ export default function EventPresent() {
                     </div>
                 </div>
                 <div className=" flex flex-wrap justify-center pb-5 p-5 lg:pt-10">
-                    <CardEventHome />
-                    <CardEventHome />
-                    <CardEventHome />
+                    <CardEventHomePaid />
                 </div>
                 <div>
                     <Pagination />
@@ -115,9 +97,7 @@ export default function EventPresent() {
                     </div>
                 </div>
                 <div className=" flex flex-wrap justify-center p-5 lg:pt-10">
-                    <CardEventHome />
-                    <CardEventHome />
-                    <CardEventHome />
+                    <CardEventHomeFree />
                 </div>
                 <div className="pb-10">
                     <Pagination />

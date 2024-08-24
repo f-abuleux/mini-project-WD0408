@@ -15,8 +15,8 @@ model User {
   username      String        @unique
   email         String        @unique
   password      String
-  referalnumber String        @unique @default(uuid())
-  referalcode   String        @default("")
+  referalnumber String?       @unique
+  referalcode   String?       @default("")
   point         Int           @default(0)
   avatar        String?
   role          role          @default(user)
@@ -62,7 +62,7 @@ model Transaction {
 
 model Review {
   id      Int    @id @default(autoincrement())
-  review  String 
+  review  String
   rating  Int    @default(0)
   userId  Int    @unique
   eventId Int    @unique
@@ -94,19 +94,20 @@ model Event {
   eventOrganizerId Int
   eventorganizer   EventOrganizer @relation(fields: [eventOrganizerId], references: [id])
   category         category
-  Promotion        Promotion?
+  Promotion        Promotion[]
   Review           Review[]
   Transaction      Transaction[]
 }
 
 model Promotion {
-  id         Int      @id @default(autoincrement())
-  startdate  DateTime
-  enddate    DateTime
-  quota      Int
-  percentage Int
-  event      Event    @relation(fields: [eventId], references: [id])
-  eventId    Int      @unique
+  id              Int      @id @default(autoincrement())
+  voucherdiscount String   @unique
+  startdate       DateTime
+  enddate         DateTime
+  quota           Int
+  percentage      Int
+  event           Event    @relation(fields: [eventId], references: [id])
+  eventId         Int
 }
 
 enum role {

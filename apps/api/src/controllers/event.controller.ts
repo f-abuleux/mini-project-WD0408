@@ -170,10 +170,38 @@ export class Event {
 
       async getEventById(req: Request, res: Response) {
             try {
+                  console.log(req.user?.id)
+                  console.log(req.params.id)
                   const event = await prisma.event.findMany({
                         where: {
                               id: +req.user?.id!
+                        },
+                        select: {
+                              name: true,
+                              description: true,
+                              price: true,
+                              date: true,
+                              seat: true,
+                              location: true,
+                              tickettype: true,
+                              image: true,
+                              category: true,
+                              eventOrganizerId: true,
+                              eventorganizer: {
+                                    select: {
+                                          id: true,
+                                          username: true,
+                                          email: true,
+                                          phonenumber: true,
+                                    }
+                              }
                         }
+                  })
+
+                  
+                  res.status(200).send({
+                        status: 'Success get event by id',
+                        data: event
                   })
             } catch (error) {
                   res.status(400).send({
@@ -219,4 +247,15 @@ export class Event {
                   })
             }
       }
+
+      // async getEventByUser(req: Request, res: Response){
+      //       try {
+      //             const event = await prisma.transaction.
+      //       } catch (error) {
+      //             res.status(400).send({
+      //                   status: "Failed Get Event By User",
+      //                   msg: error
+      //             })
+      //       }
+      // }
 }

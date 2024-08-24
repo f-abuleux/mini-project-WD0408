@@ -19,7 +19,6 @@ export const createEventPaid = async (data: FormEventTicket) => {
     formData.append('tickettype', "paid")
     formData.append('category', data.category)
 
-
     const res = await fetch("http://localhost:8000/api/event/paid", {
         method: "POST",
         headers: {
@@ -65,6 +64,12 @@ export const createEventFree = async (data: FormEventTicketFree) => {
     return res.json()
 }
 
+export interface SelectEvent{
+    id: number
+    username: string
+    email: string
+    phonenumber: string
+}
 export interface Event {
     id: number
     name: string
@@ -77,6 +82,7 @@ export interface Event {
     image: string
     category: string
     eventOrganizerId: number
+    eventorganizer: SelectEvent[]
 }
 
 
@@ -100,19 +106,21 @@ export const getEventFree = async () => {
     return { result: response, ok: res.ok }
 }
 
-export const getEventPaid = async () => {
+
+
+export const getEventPaid = async ( ) => {
     const token = await getCookie("token")
 
     interface Response {
         status : string,
         event : Event[]
     }
-
     const res = await fetch("http://localhost:8000/api/event/events/paid", {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token?.value}`,
-        }
+        // method: "GET",
+        // headers: {
+        //     "Authorization": `Bearer ${token?.value}`,
+        // },
+        next : { revalidate : 60, tags: ["EventPaid"] }
     })
     const response: Response = await res.json()
     return { result: response, ok: res.ok }

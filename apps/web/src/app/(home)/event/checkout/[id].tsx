@@ -9,26 +9,19 @@ import * as yup from "yup";
 import { Metadata } from "next";
 
 const checkoutSchema = yup.object().shape({
-      name: yup.string().required("username is required"),
-      email: yup.string().email("please enter a valid email").required("email is required"),
-      phonenumber: yup.string().matches(/^[0-9]+$/, "phonenumber must contain only numbers").required("phonenumber is required"),
-      amount: yup.number().required("amount is required").positive("amount must be a positive number"),
+      quantitiy: yup.number().required("amount is required").positive("amount must be a positive number"),
       voucherdiscount: yup.string(),
       point: yup.boolean()
 })
 
 interface ICheckout {
-      name: string;
-      email: string;
-      phonenumber: string;
-      amount: number;
+      quantitiy: number;
       voucherdiscount: string;
       point: boolean;
 }
 
 export default function Checkout() {
-      const initialValues: ICheckout = {
-            name: "", email: "", phonenumber: "", amount: 0,
+      const initialValues: ICheckout = { quantitiy: 0,
             voucherdiscount: "", point: false
       }
       return (
@@ -55,7 +48,7 @@ export default function Checkout() {
                                     <div>
                                           <div className="flex gap-2 items-center px-5">
                                                 <BsClipboardCheck className="w-[30px] h-[30px]" />
-                                                <h1 className="font-[bold] text-[28px] text-third">Your Details</h1>
+                                                <h1 className="font-[bold] text-[28px] text-third">Details</h1>
                                           </div>
                                           <Formik
                                                 initialValues={initialValues}
@@ -69,54 +62,15 @@ export default function Checkout() {
                                                             <div className="flex flex-col gap-5 m-5">
                                                                   <Form>
                                                                         <div className="flex flex-col gap-5">
-                                                                              <div>
+                                                                                                                        <div>
                                                                                     <Field
                                                                                           type="text"
-                                                                                          name="name"
-                                                                                          placeholder="Name"
-                                                                                          className="text-white w-[350px] lg:w-[550px] border-[1px] h-[50px] p-5 rounded-[10px] border-secondary"
-                                                                                    />
-                                                                                    <ErrorMessage
-                                                                                          name="name"
-                                                                                          component={"div"}
-                                                                                          className="text-third text-[12px]"
-                                                                                    />
-                                                                              </div>
-                                                                              <div>
-                                                                                    <Field
-                                                                                          type="text"
-                                                                                          name="email"
-                                                                                          placeholder="Email"
-                                                                                          className="text-white w-[350px] lg:w-[550px] border-[1px] h-[50px] p-5 rounded-[10px] border-secondary"
-                                                                                    />
-                                                                                    <ErrorMessage
-                                                                                          name="email"
-                                                                                          component={"div"}
-                                                                                          className="text-third text-[12px]"
-                                                                                    />
-                                                                              </div>
-                                                                              <div>
-                                                                                    <Field
-                                                                                          type="text"
-                                                                                          name="phonenumber"
-                                                                                          placeholder="08XXXXXXXXXX"
-                                                                                          className="text-white w-[350px] lg:w-[550px] border-[1px] h-[50px] p-5 rounded-[10px] border-secondary"
-                                                                                    />
-                                                                                    <ErrorMessage
-                                                                                          name="phonenumber"
-                                                                                          component={"div"}
-                                                                                          className="text-third text-[12px]"
-                                                                                    />
-                                                                              </div>
-                                                                              <div>
-                                                                                    <Field
-                                                                                          type="text"
-                                                                                          name="amount"
+                                                                                          name="quantitiy"
                                                                                           placeholder="Amount of Ticket"
                                                                                           className="text-white w-[175px] border-[1px] h-[50px] p-5 rounded-[10px] border-secondary"
                                                                                     />
                                                                                     <ErrorMessage
-                                                                                          name="amount"
+                                                                                          name="quantitiy"
                                                                                           component={"div"}
                                                                                           className="text-third text-[12px]"
                                                                                     />

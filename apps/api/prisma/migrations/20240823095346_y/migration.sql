@@ -5,7 +5,7 @@ CREATE TABLE `User` (
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
     `referalnumber` VARCHAR(191) NULL,
-    `referalcode` VARCHAR(191) NOT NULL DEFAULT '',
+    `referalcode` VARCHAR(191) NULL DEFAULT '',
     `point` INTEGER NOT NULL DEFAULT 0,
     `avatar` VARCHAR(191) NULL,
     `role` ENUM('user', 'eventorganizer') NOT NULL DEFAULT 'user',
@@ -82,13 +82,14 @@ CREATE TABLE `Event` (
 -- CreateTable
 CREATE TABLE `Promotion` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `voucherdiscount` VARCHAR(191) NOT NULL,
     `startdate` DATETIME(3) NOT NULL,
     `enddate` DATETIME(3) NOT NULL,
     `quota` INTEGER NOT NULL,
     `percentage` INTEGER NOT NULL,
     `eventId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `Promotion_eventId_key`(`eventId`),
+    UNIQUE INDEX `Promotion_voucherdiscount_key`(`voucherdiscount`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

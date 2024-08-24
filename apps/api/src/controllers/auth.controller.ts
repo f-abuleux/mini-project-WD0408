@@ -9,8 +9,11 @@ import fs from 'fs'
 import handlebars from "handlebars"
 import jwt from 'jsonwebtoken'
 import { referalCodeGenerator } from "@/helpers/referalcodegenerator"
+import { UserController } from "./user.controller"
 
 export class AuthController {
+
+      constructor() { }
       async createUserData(req: Request, res: Response) {
             try {
                   const newUser = await prisma.user.findFirst({
@@ -23,13 +26,6 @@ export class AuthController {
                   })
                   if (newUser?.username === req.body.username) throw 'Username already exist'
                   if (newUser?.email === req.body.email) throw 'Email already exist'
-
-                  // const checkReferal =  await this.findReferalNumber(req, res)
-                  // console.log(checkReferal)
-
-                  // const updatePointUser = await prisma.user.findFirst({
-                  //       where: { referalnumber: req.body.referalnumber }
-                  // })
 
                   const password = await hashPass(req.body.password)
 
@@ -48,7 +44,6 @@ export class AuthController {
                         username: req.body.username,
                         link: `http://localhost:3000/verify/${token}`
                   })
-                  console.log(token)
 
                   await transporter.sendMail({
                         from: process.env.MAIL_USER,
@@ -95,14 +90,54 @@ export class AuthController {
                         expirationDate.setMonth(expirationDate.getMonth() + 3);
                         if (currentDate > expirationDate) {
                               await prisma.user.update({
-                                    where: { referalnumber: user.referalcode },
-                                    data: { point: { decrement: 10000 }}
+                                    where: { referalnumber: user.referalcode !== null ? user.referalcode : undefined },
+                                    data: { point: { decrement: 10000 } }
                               });
                               await prisma.user.update({
                                     where: { id: user.id },
                                     data: { referalcode: '' }
                               })
-                        }  
+                        }
+                  }
+
+                  if (user.referalnumber !== "") {
+
+                        const updateAllReferal = await prisma.user.updateMany({
+                              where: {
+                                    createdAd: {
+                                          lt: new Date(new Date().setMonth(new Date().getMonth() - 3))
+                                    }
+                              },
+                              data: {
+                                    referalcode: ''
+                              }
+                        })
+
+                        const updatePoint = await prisma.user.update({
+                              where: { referalnumber: user.referalnumber! },
+                              data: { point: { decrement: updateAllReferal.count * 10000 } }
+                        })
+
+                        console.log(updatePoint)
+
+                        // for (let i = 0; i < expireFinder.length; i++) {
+                        //       const currentDate = new Date()
+                        //       const expirationDate = new Date(expireFinder[i].createdAd)
+                        //       expirationDate.setMonth(expirationDate.getMonth() + 3)
+                        //       if(currentDate > expirationDate){
+                        //             await prisma.user.update({
+                        //                   where: { referalcode: expireFinder.referalnumber!},
+                        //                   data: { referalcode: '' }
+                        //             })
+                        //       }
+                        // }
+                  }
+
+                  if (user.point < 0) {
+                        await prisma.user.update({
+                              where: { id: user.id },
+                              data: { point: 0 },
+                        });
                   }
 
                   res.status(200).send({

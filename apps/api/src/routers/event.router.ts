@@ -14,11 +14,12 @@ export class EventRouter {
       }
 
       private initializeRoutes(): void {
+            this.router.get(`/events`, verifyToken, this.eventController.getEventById)
+            this.router.get("/events/paid", verifyToken, this.eventController.getEventPaid)
+            this.router.get("/events/free", verifyToken, this.eventController.getEventFree)
             this.router.post("/paid", verifyToken, checkRole, uploader("event", "/event").single("image"), this.eventController.createEventPaid)
             this.router.post("/free", verifyToken, checkRole, uploader("event", "/event").single("image"), this.eventController.createEventFree)
             // this.router.get("/event", this.eventController.getEvent)
-            this.router.get("/events/paid", verifyToken, this.eventController.getEventPaid)
-            this.router.get("/events/free", verifyToken, this.eventController.getEventFree)
 
       }
       
