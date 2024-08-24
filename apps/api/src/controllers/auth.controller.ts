@@ -226,5 +226,77 @@ export class AuthController {
                   })
             }
       }
+
+      async updatePasswordUser(req: Request, res: Response){
+            try {
+                  // const password = await compare(req.body.password, user.password)
+                  const user = await prisma.user.findUnique({
+                        where: {
+                              id: req.user?.id
+                        },
+                  })
+                  const isValidPass = await compare(req.body.password, user?.password!)
+                  if (!isValidPass) throw 'Incorrect password'
+
+                  const { newPassword, confirmPassword} = req.body
+                  if(newPassword !== confirmPassword) throw 'Password not match'
+
+                  await prisma.user.update({
+                        where: {
+                              id: req.user?.id
+                        },
+                        data: {
+                              password: await hashPass(newPassword)
+                        }
+                  })
+
+                  res.status(200).send({
+                        status: 'Success Update Password',
+                        msg: 'Password updated',
+                        user,
+                  })
+            } catch (error) {
+                  res.status(400).send({
+                        status: "Failed Update Password",
+                        msg: error
+                  })
+            }
+      }
+
+      async updateEmailUser(req: Request, res: Response){
+            try {
+                  const user = await prisma.user.findUnique({
+                        where: {
+                              id: req.user?.id
+                        },
+                  })
+                  if(req.body.email !== user?.email) throw 'Email not match'
+
+                  const { newEmail, confirmEmail } = req.body
+                  if(newEmail !== confirmEmail) throw 'Email not match'
+
+                  await prisma.user.update({
+                        where: {
+                              id: req.user?.id
+                        },
+                        data: {
+                              email: newEmail
+                        }
+                  })
+                  const password = await compare(req.body.password, user?.password!)
+                  if (!password) throw 'Incorrect password'
+                  
+                  res.status(200).send({
+                        status: 'Success Update Email',
+                        msg: 'Email updated',
+                        user
+                  })
+            } catch (error) {
+                  res.status(400).send({
+                        status: "Failed Update Email",
+                        msg: error
+                  })
+            }
+      }
 }
 

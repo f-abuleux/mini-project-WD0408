@@ -52,38 +52,64 @@ export class TransactionController {
                               }
                         })
 
-                        if (user?.point! < 100) {
+                        if (user?.point! < 1000) {
                               res.status(400).send({
                                     status: "Failed create transaction data",
-                                    msg: "You don't have enough point"
+                                    msg: "You don't have enough point, you need at least 1000 point"
                               })
                         }
 
+                        if (req.body.referalcode == "") {
+                              //- DISC 10% - +POINT
+                              await prisma.transaction.create({
+                                    data: {
+                                          quantitiy,
+                                          price: event?.price,
+                                          finalprice: (price * quantitiy - user?.point!),
+                                          userId: req.user?.id!,
+                                          eventId: Number(req.params.eventId),
+                                          paymentlink: "",
+                                          proofpayment: "",
+                                    } 
+                              })
 
-                        await prisma.transaction.create({
-                              data: {
-                                    quantitiy,
-                                    price: event?.price,
-                                    finalprice: (price * quantitiy - user?.point!),
-                                    userId: req.user?.id!,
-                                    eventId: Number(req.params.eventId),
-                                    paymentlink: "",
-                                    proofpayment: "",
-                              }
-                        })
-
-                        await prisma.user.update({
-                              data: {
-                                    point: {
-                                          decrement: user?.point
+                              await prisma.user.update({
+                                    data: {
+                                          point: {
+                                                decrement: user?.point
+                                          }
+                                    },
+                                    where: {
+                                          id: req.user?.id
                                     }
-                              },
-                              where: {
-                                    id: req.user?.id
-                              }
-                        })
-                  }
+                              })
+                        } else if (req.body.referalcode !== "") {
+                              // + DISC 10% - +POINT
+                              await prisma.transaction.create({
+                                    data: {
+                                          quantitiy,
+                                          price: event?.price,
+                                          finalprice: ((price * quantitiy - (price * quantitiy * (10 / 100))) - user?.point!),
+                                          userId: req.user?.id!,
+                                          eventId: Number(req.params.eventId),
+                                          paymentlink: "",
+                                          proofpayment: "",
+                                    }
+                              })
 
+                              await prisma.user.update({
+                                    data: {
+                                          point: {
+                                                decrement: user?.point
+                                          }
+                                    },
+                                    where: {
+                                          id: req.user?.id
+                                    }
+                              })
+                        }
+                  }
+                  //-DISC 10% - -POINT
                   else if (req.body.referalcode == '') {
                         const user = await prisma.user.findFirst({
                               where: {
@@ -105,7 +131,7 @@ export class TransactionController {
                               data: {
                                     quantitiy,
                                     price: event?.price,
-                                    finalprice: (price * quantitiy - (price * quantitiy * (10 / 100))),
+                                    finalprice: price * quantitiy,
                                     userId: req.user?.id!,
                                     eventId: Number(req.params.eventId),
                                     paymentlink: "",
@@ -114,11 +140,13 @@ export class TransactionController {
                         })
                   }
 
+                  
                   const transaction = await prisma.transaction.create({
                         data: {
+                              //+ DISC 10% - -POINT
                               quantitiy,
                               price: event?.price,
-                              finalprice: price * quantitiy,
+                              finalprice: (price * quantitiy - (price * quantitiy * (10 / 100))),
                               userId: req.user?.id!,
                               eventId: Number(req.params.eventId),
                               paymentlink: "",
@@ -167,6 +195,7 @@ export class TransactionController {
                   })
             }
       }
+
 
       async updateStatusTransaction(req: Request, res: Response) {
             try {
