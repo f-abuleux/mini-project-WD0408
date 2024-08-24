@@ -92,6 +92,17 @@ export class Event {
 
       async getEventPaid(req: Request, res: Response) {
             try {
+                  interface FilterS {
+                        OR?: [{ name: { contains: string } }]
+                  }
+
+                  const { search, page } = req.query
+                  const filterQ: FilterS = {}
+                  if (search) {
+                        filterQ.OR = [
+                              { name: { contains: search as string } },
+                        ]
+                  }
                   const event = await prisma.event.findMany({
                         select: {
                               id: true,

@@ -32,7 +32,7 @@ export default function CardEventHomeFree() {
     return (
         <div>
             {
-                data.map((event, index) => {
+                data?.map((event, index) => {
                     return (
                         <div key={index} className="w-full px-6 lg:w-[400px]">
                             <div className="bg-gradient-to-t from-indigo-950 to-gray-500 rounded-xl overflow-hidden shadow-lg mb-10">
