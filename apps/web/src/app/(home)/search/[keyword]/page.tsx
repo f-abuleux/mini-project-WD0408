@@ -97,7 +97,7 @@ const SearchPage = ({ params }: SearchPageProps) => {
 
             </div>
             <div className="grid grid-cols-4 p-10 gap-3">
-                {events.map((listEvent, idx) => {
+                {events?.map((listEvent, idx) => {
 
                     return (
                         <CardSearch key={idx} list={listEvent} />

@@ -16,6 +16,7 @@ export interface FormEventTicketFree {
     name: string,
     category: string,
     date: string,
+    time: string,
     seat: string,
     location: string,
     description: string,
@@ -77,6 +78,7 @@ export default function MenuEventTicketFree () {
         image: yup.string().required("required fields"),
         name: yup.string().required("required fields"),
         date: yup.string().required("required fields"),
+        time: yup.string().required("required fields"),
         seat: yup.string().required("required fields"),
         location: yup.string().required("required fields"),
         description: yup.string().required("required fields"),
@@ -88,6 +90,7 @@ export default function MenuEventTicketFree () {
         name: "",
         category: "",
         date: "",
+        time: "",
         seat: "",
         location: "",
         description: "",
@@ -191,6 +194,21 @@ export default function MenuEventTicketFree () {
                                                         component={'div'}
                                                         className="text-xs text-red-700"
                                                     />
+                                                </div>
+                                                <div className="lg:pt-5">
+                                                    <p className="text-white font-normal text-sm">Time</p>
+                                                    <div className="pt-2">
+                                                        <Field
+                                                            type= "time"
+                                                            name="time"
+                                                            className="w-full h-[30px] p-1 text-center text-primary text-[14px] rounded-md bg-white border border-solid resize-none"
+                                                        />
+                                                        <ErrorMessage
+                                                            name="time"
+                                                            component={'div'}
+                                                            className="text-xs text-red-700"
+                                                        />
+                                                    </div>
                                                 </div>
                                                 <div className="lg:pt-5">
                                                     <p className="text-white font-normal text-sm">Visitor Quota</p>
