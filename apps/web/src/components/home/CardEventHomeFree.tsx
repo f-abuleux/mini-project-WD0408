@@ -7,6 +7,7 @@ import AvatarUserEo from "../Profile/AvatarUserProfile";
 import { useEffect, useState } from "react";
 import { Event } from "@/libs/action/event";
 import { getCookie } from "@/libs/action/server";
+import Pagination from "../search/Pagination";
 
 // fetch data (client-side)
 export default function CardEventHomeFree() {
@@ -64,6 +65,9 @@ export default function CardEventHomeFree() {
                     )
                 })
             }
+            <div>
+                <Pagination page={data} lastpage={data} setData={setData}/>
+            </div>
         </div>
     )
 }

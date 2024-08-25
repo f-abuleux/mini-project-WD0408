@@ -1,10 +1,10 @@
-import React from 'react'
-import CardSearch from './CardSearch'
+// import React from 'react'
+// import CardSearch from './CardSearch'
 
-export const ListSearch = ({ api }: { api: Event }) => {
-    return (
-        <div>
-            <CardSearch />
-        </div>
-    )
-}
+// export const ListSearch = ({ api }: { api: Event }) => {
+//     return (
+//         <div>
+//             <CardSearch />
+//         </div>
+//     )
+// }
