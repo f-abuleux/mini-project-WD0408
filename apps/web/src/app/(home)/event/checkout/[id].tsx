@@ -21,8 +21,10 @@ interface ICheckout {
 }
 
 export default function Checkout() {
-      const initialValues: ICheckout = { quantitiy: 0,
-            voucherdiscount: "", point: false
+      const initialValues: ICheckout = {
+            quantitiy: 0,
+            voucherdiscount: "",
+            point: false
       }
       return (
             <div>
@@ -62,7 +64,7 @@ export default function Checkout() {
                                                             <div className="flex flex-col gap-5 m-5">
                                                                   <Form>
                                                                         <div className="flex flex-col gap-5">
-                                                                                                                        <div>
+                                                                              <div>
                                                                                     <Field
                                                                                           type="text"
                                                                                           name="quantitiy"

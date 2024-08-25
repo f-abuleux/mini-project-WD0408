@@ -6,7 +6,11 @@ import { header } from "express-validator";
 export class TransactionController {
       async getTransactionData(req: Request, res: Response) {
             try {
-                  const transactionData = await prisma.transaction.findMany()
+                  const transactionData = await prisma.transaction.findMany({
+                        where : {
+                              eventId : Number(req.params.eventId)
+                        }
+                  })
                   res.status(200).send({
                         status: "Success get transaction data",
                         data: transactionData

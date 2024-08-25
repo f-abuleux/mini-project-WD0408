@@ -9,14 +9,11 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 // import { useAppSelector } from '@/redux/hooks';
 
-interface User {
+interface IOrganizer {
     id: number;
     username: string;
     email: string;
     password: string;
-    referalnumber: string;
-    referalcode: string;
-    point: number;
     avatar: string;
     role: string;
     phonenumber: string;
@@ -24,13 +21,13 @@ interface User {
     createdAd: string;
 }
 
-export default function MenuAvatarUser() {
+export default function MenuAvatarEO(token: any) {
     const [ModalOpen, setModalOpen] = useState(false)
-    const [data, setData] = useState<User[]>([]);
+    const [data, setData] = useState<IOrganizer[]>([]);
     const router = useRouter()
     const getUser = async () => {
         const token = await getCookie("token")
-        const getUser = await fetch(`http://localhost:8000/api/users/${token}`, {
+        const getUser = await fetch(`http://localhost:8000/api/organizers/${token}`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token?.value}`,
@@ -56,7 +53,7 @@ export default function MenuAvatarUser() {
 
     const HandleLogout = () => {
         deleteCookie("token")
-        router.push("/loginuser")
+        router.push("/loginorganizer")
     }
 
     // const token = getCookie("token")
@@ -81,8 +78,7 @@ export default function MenuAvatarUser() {
                         </div>
                         <ModalProfile isOpen={ModalOpen} onClose={HandleClose} >
                             <div className="flex flex-col">
-                                <a href={`/profile`} className="text-primary font-semibold text-start text-[12px] hover:text-third pb-1">Profile</a>
-                                <div className="pt-5">
+                                <div className="">
                                     <button onClick={HandleLogout} className="py-1 px-[39px] bg-primary rounded-lg text-secondary hover:text-red-400">Logout</button>
                                 </div>
                             </div>

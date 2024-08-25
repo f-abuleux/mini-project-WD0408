@@ -4,7 +4,7 @@ import { deleteCookie, getCookie } from "./libs/action/server";
 
 //TAMBAH URL YANG INGIN DIPROTEKSI SEPERTI BUY NOW
 
-const protectPages = ["/home", ]
+const protectPages = ["/home", "/", '/profile']
 const protectPagesOrganizer = ["/create", ]
 
 

@@ -198,7 +198,7 @@ export class Event {
                         }
                   })
 
-                  
+
                   res.status(200).send({
                         status: 'Success get event by id',
                         data: event
@@ -258,4 +258,23 @@ export class Event {
       //             })
       //       }
       // }
+
+      async getDetailEvent(req: Request, res: Response) {
+            try {
+                  const event = await prisma.event.findMany({
+                        where: {
+                              id: +req.params.id
+                        }
+                  })
+                  res.status(200).send({
+                        status: 'Success Get Detail Event',
+                        data: event
+                  })
+            } catch (error) {
+                  res.status(400).send({
+                        status: "Failed Get Detail Event",
+                        msg: error
+                  })
+            }
+      }
 }

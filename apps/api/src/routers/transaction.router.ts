@@ -13,6 +13,7 @@ export class TransactionRouter {
       }
 
       private initializeRoutes(): void {
+            this.router.get("/transaction/:eventId", verifyToken,checkRole ,  this.transactionController.getTransactionData)
             this.router.post(`/transaction/:id`, verifyToken, this.transactionController.createTransactionData);
             this.router.post('/transaction/status', this.transactionController.updateStatusTransaction);
       }

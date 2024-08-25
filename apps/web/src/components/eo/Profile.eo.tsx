@@ -1,15 +1,11 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
 import { RiUser3Fill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { RiDiscountPercentLine } from "react-icons/ri";
-import { LiaUserTagSolid } from "react-icons/lia";
 import { useEffect, useState } from "react";
 import { getCookie } from "@/libs/action/server";
-import axios from "axios";
-import Cookies from "js-cookie";
+
 export interface IUser {
     id: number;
     username: string;
@@ -25,24 +21,25 @@ export interface IUser {
     createdAd: string;
 }
 
-export default function ProfileUser() {
-    const [dataUser, setDataUser] = useState<IUser>();
+export default function ProfileEO() {
+    const [data, setData] = useState([])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const token = await Cookies.get("token")
-            const user = await axios.get("http://localhost:8000/api/users", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                },
-            })
-            setDataUser(user.data.data);
-        }
-        fetchData()
-    }, [])
+    const getOrganizer = async () => {
+        const token = await getCookie("token")
+        const organizer = await fetch(`http://localhost:8000/api/oraganizers/${token}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token?.value}`,
+            }
+        })
+        const response = await organizer.json()
+        setData(response.data);
+    }
 
-    console.log(dataUser)
+    useEffect(()=> {
+        getOrganizer()
+    })
+    
 
     return (
         <div>
@@ -56,15 +53,10 @@ export default function ProfileUser() {
                     </div>
                     <div className="p-10 pt-0 lg:pt-16">
                         <h1 className="text-2xl font-bold text-white flex gap-2"><RiUser3Fill size={26} className="pt-1" />
-                            <span>{dataUser?.username!}</span></h1>
+                            <span>NAMA EO</span></h1>
                         <h3 className="text-md font-normal text-white flex gap-2 pt-2"><span><MdEmail size={25} className="" /></span>
-                            {dataUser?.email!}</h3>
-                        <h3 className="text-md font-normal text-white flex gap-2 pt-2"><RiDiscountPercentLine size={25} />
-                            <span>{dataUser?.referalnumber!}</span>
-                        </h3>
-                        <h3 className="text-md font-normal text-white flex gap-2 pt-2"><LiaUserTagSolid size={25} />
-                            <span>Point : <span>{dataUser?.point!}</span></span>
-                        </h3>
+                            EMAIL EO</h3>
+
                     </div>
                 </div>
             </div>

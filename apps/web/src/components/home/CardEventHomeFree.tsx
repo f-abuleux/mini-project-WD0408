@@ -7,6 +7,7 @@ import AvatarUserEo from "../Profile/AvatarUserProfile";
 import { useEffect, useState } from "react";
 import { Event } from "@/libs/action/event";
 import { getCookie } from "@/libs/action/server";
+import { get } from "cypress/types/lodash";
 
 // fetch data (client-side)
 export default function CardEventHomeFree() {
@@ -21,7 +22,6 @@ export default function CardEventHomeFree() {
             // next: { revalidate: 60, tags: ["EventPaid"] }
         })
         const response = await event.json()
-
         setData(response.data);
     }
 
@@ -57,7 +57,7 @@ export default function CardEventHomeFree() {
                                     <p className="text-secondary pb-3 text-sm">{event.date}</p>
                                     <p className="text-secondary font-semibold">Price</p>
                                     <p className="text-secondary font-semibold pb-10 text-xl">Free</p>
-                                    <Link href="/event" className="text-secondary py-3 px-3 pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">View Event</Link>
+                                    <Link href={`/event/${event.id}`} className="text-secondary py-3 px-3 pb-3 rounded-xl border border-solid border-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out">View Event</Link>
                                 </div>
                             </div>
                         </div>

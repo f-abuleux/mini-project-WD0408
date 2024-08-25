@@ -1,25 +1,29 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-import { TbWorldHeart } from "react-icons/tb";
-import { SiEsbuild } from "react-icons/si";
-import { IoMdMegaphone } from "react-icons/io";
-import { GiReceiveMoney } from "react-icons/gi";
 import { FaGoogle } from "react-icons/fa"
 import { FaSpotify } from "react-icons/fa";
 import { FaWindows } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
-import Navbar from "@/components/navbar/Navbar";
-import MenuAvatarUser from "@/components/navbar/menuAvatarUser";
+import { deleteCookie } from "@/libs/action/server";
+import { useRouter } from "next/navigation";
 
 
 export default function ContentWelcome() {
+    const router = useRouter()
+
+    const handleCreateEvent = () => {
+        deleteCookie("token")
+        router.push("/registerorganizer")
+    }
     return (
         <div>
             <div className="w-full bg-gradient-to-b from-primary to-primary to-20% pb-32 lg:pb-44">
                 <div>
-                <Image src="/bg4.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:hidden lg:hidden" />
-                <Image src="/bg2.png" alt="Background" width={1440} height={100} className="absolute opacity-60" />
+                    <Image src="/bg4.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:hidden lg:hidden" />
+                    <Image src="/bg2.png" alt="Background" width={1440} height={100} className="absolute opacity-60" />
                 </div>
                 <div className="w-full lg:justify-center p-5 relative pt-48 lg:pt-36">
                     <div className="pb-10 text-center lg:px-52 lg:pt-20">
@@ -41,7 +45,7 @@ export default function ContentWelcome() {
                     <div className="flex justify-center gap-6 lg:gap-10">
                         <Link href="/#AboutUs" className="text-white text-center text-sm flex justify-center font-semibold py-2 px-3 border border-solid border-secondary rounded-full hover:text-third">See more About Us</Link>
                         <Link href="/#SeeEvent" className="text-white text-center text-sm flex justify-center font-semibold py-2 px-3 border border-solid border-secondary rounded-full hover:text-third">See more Event</Link>
-                        <Link href="/create" target="_blank" className="text-white text-center text-sm bg-gradient-to-l from-third to-primary flex justify-center font-semibold py-2 px-5 border border-solid border-secondary rounded-full hover:text-third">Create Event</Link>
+                        <button onClick={handleCreateEvent} className="text-white text-center text-sm bg-gradient-to-l from-third to-primary flex justify-center font-semibold py-2 px-5 border border-solid border-secondary rounded-full hover:text-third">Be EO and Create Event</button>
                     </div>
                 </div>
             </div>

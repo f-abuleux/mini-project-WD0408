@@ -13,7 +13,7 @@ export class OragnizerRouter {
       }
 
       private initializeRoutes() : void {
-            this.router.get("/", this.organizerController.getOrganizerData)
+            this.router.get("/:token", this.organizerController.getOrganizerData)
       }
 
       getRouter() : Router {

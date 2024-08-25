@@ -1,14 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-import { TbWorldHeart } from "react-icons/tb";
-import { SiEsbuild } from "react-icons/si";
-import { IoMdMegaphone } from "react-icons/io";
-import { GiReceiveMoney } from "react-icons/gi";
-import { FaGoogle } from "react-icons/fa"
-import { FaSpotify } from "react-icons/fa";
-import { FaWindows } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/react";
 import MenuLogin from "./menulogin";

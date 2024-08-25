@@ -5,10 +5,13 @@ import MenuAvatarUser from "./menuAvatarUser";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import Link from "next/link";
 import { getCookie } from "@/libs/action/server";
+import MenuAvatarEO from "./menuAvatarEO";
 
 export default function NavbarUser() {
-    const token = getCookie("token")
+    const token = getCookie("token")?.value
 
+
+    console.log(token)
     return (
         <div>
             <Navbar shouldHideOnScroll className="fixed top-0 z-50 hidden lg:flex pt-5">
@@ -19,19 +22,10 @@ export default function NavbarUser() {
                 </NavbarBrand>
                 <NavbarContent className="flex gap-16 py-3 pr-3">
                     <NavbarItem>
-                        <Link href="/home" className='text-secondary font-semibold text-[15px] hover:text-orange-300'>HOME</Link>
+                        <Link href="/create" className='text-secondary font-semibold text-[15px] hover:text-orange-300'>CREATE EVENT</Link>
                     </NavbarItem>
                     <NavbarItem>
-                        <Link href="/home#SeeEvent" className='text-secondary font-semibold text-[15px] hover:text-orange-300'>EVENT</Link>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <Link href="/home#AboutUs" className='text-secondary font-semibold text-[15px] hover:text-orange-300'>ABOUT</Link>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <Link href="/home#Testimonial" className='text-secondary font-semibold text-[15px] hover:text-orange-300'>TESTIMONIAL</Link>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <MenuAvatarUser />
+                        <MenuAvatarEO token={token} />
                     </NavbarItem>
                 </NavbarContent>
             </Navbar>

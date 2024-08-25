@@ -22,7 +22,7 @@ export interface ILogin {
 }
 const initialValues: ILogin = { username: "", password: "" };
 
-export default function Login() {
+export default function Login(params : any) {
       const router = useRouter()
 
       const onLogin = async (data: ILogin, action : FormikHelpers<ILogin>) => {
@@ -32,7 +32,7 @@ export default function Login() {
                         throw result.msg
                   }
                   createCookie('token', result.token)
-                  router.push('/home')
+                  router.push(`/eodashboard/${params}`)
                   console.log(result)
                   console.log(ok)
                   toast.info(result.msg)
