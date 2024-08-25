@@ -5,7 +5,7 @@ import img2 from '@/app/(home)/beranda/components/eventgratis.png';
 import { TbArmchair } from "react-icons/tb";
 import AvatarUserEo from "../Profile/AvatarUserProfile";
 import CardEventHome from "./CardEventHomePaid";
-import Pagination from "./Pagination";
+import Pagination from "../search/Pagination";
 import { Event, getEventFree, getEventPaid } from "@/libs/action/event";
 import { data } from "cypress/types/jquery";
 import CardEventHomePaid from "./CardEventHomePaid";
@@ -59,9 +59,6 @@ export default function EventPresent() {
                 <div className=" flex flex-wrap justify-center pb-5 p-5 lg:pt-10">
                     <CardEventHomePaid />
                 </div>
-                <div>
-                    <Pagination />
-                </div>
                 <div id="EventFree" className="lg:pl-[110px]">
                     <h3 className="text-lg text-secondary pt-8 pb-5 flex justify-center lg:justify-start">- FREE EVENT -</h3>
                     <div className="flex flex-wrap justify-center gap-10 pb-5 lg:justify-start lg:pb-0">
@@ -97,11 +94,8 @@ export default function EventPresent() {
                         </select>
                     </div>
                 </div>
-                <div className=" flex flex-wrap justify-center p-5 lg:pt-10">
+                <div className=" flex flex-wrap justify-center p-5 pb-10 lg:pt-10">
                     <CardEventHomeFree />
-                </div>
-                <div className="pb-10">
-                    <Pagination />
                 </div>
                 <div className="p-20 flex flex-wrap gap-32 justify-center">
                     <div>

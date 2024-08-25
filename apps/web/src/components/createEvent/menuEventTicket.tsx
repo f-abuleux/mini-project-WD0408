@@ -16,7 +16,7 @@ export interface FormEventTicket {
     name: string,
     category: string,
     date: string,
-    time:string,
+    time: string,
     seat: string,
     location: string,
     description: string,
@@ -48,22 +48,7 @@ export default function MenuEventTicket() {
         setModalOpen(false)
     }
 
-    const [startDate, setStartDate] = useState(new Date());
-
-
-    const [qty, number] = useState(0);
-
-    const plus = () => {
-        number(a => a + 1);
-    }
-
-    const min = () => {
-        if (qty > 0) {
-            number(qty - 1)
-        }
-    }
-
-    // SETTINGAN FORMIK
+    //FETCH DATA
     const createEvent = async (data: FormEventTicket) => {
         try {
             const res = await createEventPaid(data)
@@ -73,7 +58,7 @@ export default function MenuEventTicket() {
         }
     }
 
-
+    // SETTINGAN FORMIK
     const validationSchema = yup.object().shape({
         image: yup.string().required("required fields image"),
         name: yup.string().required("required fields name"),
@@ -201,7 +186,7 @@ export default function MenuEventTicket() {
                                                     <p className="text-white font-normal text-sm">Time</p>
                                                     <div className="pt-2">
                                                         <Field
-                                                            type= "time"
+                                                            type="time"
                                                             name="time"
                                                             className="w-full h-[30px] p-1 text-center text-primary text-[14px] rounded-md bg-white border border-solid resize-none"
                                                         />
@@ -216,11 +201,11 @@ export default function MenuEventTicket() {
                                                     <p className="text-white font-normal text-sm">Visitor Quota</p>
                                                     <div className="flex gap-3">
                                                         <div className="pt-2">
-                                                            <Field
-                                                                type="number"
-                                                                name="seat"
-                                                                className="w-[50px] h-[30px] p-1 text-center text-primary text-[14px] rounded-md bg-white border border-solid resize-none"
-                                                            />
+                                                                <Field
+                                                                    type="number"
+                                                                    name="seat"
+                                                                    className="w-[50px] h-[30px] p-1 text-center text-primary text-[14px] rounded-md bg-white border border-solid resize-none"
+                                                                />
                                                             <ErrorMessage
                                                                 name="seat"
                                                                 component={'div'}
