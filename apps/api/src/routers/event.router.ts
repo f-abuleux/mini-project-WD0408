@@ -14,7 +14,8 @@ export class EventRouter {
       }
 
       private initializeRoutes(): void {
-            this.router.get(`/events`, verifyToken, this.eventController.getEventById)
+            this.router.get(`/events/pass`, verifyToken, this.eventController.getEventByIdPass)
+            this.router.get(`/events/notpass`, verifyToken, this.eventController.getEventById)
             this.router.get("/events/paid",  this.eventController.getEventPaid)
             this.router.get("/events/free",  this.eventController.getEventFree)
             this.router.get("/eventdetails/:id", verifyToken,  this.eventController.getDetailEvent)

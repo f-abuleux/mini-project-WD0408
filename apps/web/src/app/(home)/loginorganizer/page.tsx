@@ -10,6 +10,7 @@ import { createCookie, deleteCookie } from "@/libs/action/server";
 import { useRouter } from "next/navigation";
 import { Metadata } from "next";
 import { toast } from "react-toastify";
+import { result } from "cypress/types/lodash";
 
 const signUpSchema = yup.object().shape({
       username: yup.string().required("username is required"),
@@ -22,7 +23,7 @@ export interface ILogin {
 }
 const initialValues: ILogin = { username: "", password: "" };
 
-export default function Login(params : any) {
+export default function Login() {
       const router = useRouter()
 
       const onLogin = async (data: ILogin, action : FormikHelpers<ILogin>) => {
@@ -32,18 +33,19 @@ export default function Login(params : any) {
                         throw result.msg
                   }
                   createCookie('token', result.token)
-                  router.push(`/eodashboard/${params}`)
+                  router.push(`/eodashboard`)
                   console.log(result)
                   console.log(ok)
-                  toast.info(result.msg)
+                  toast.success(result.msg)
             } catch (error) {
+                  toast.error("Username or Password is incorrect")
                   console.log(error)
             }
       }
 
       return (
             <div className="bg-gradient-to-b from-primary to-primary to-20%" id="#loginorganizer">
-                  <Image src="/bg5.png" alt="Background" width={800} height={100} className="absolute opacity-40 md:w-auto lg:w-[1440px]" />
+                  <Image src="/bg5.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[2200px]" />
                   <div className="flex justify-center relative pt-10">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"

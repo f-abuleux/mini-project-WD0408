@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState,  } from 'react';
 import ModalEventTicket from "./modal_eventpay";
 import "react-datepicker/dist/react-datepicker.css";
 import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps, useFormik } from "formik";
@@ -8,6 +8,8 @@ import * as yup from "yup";
 import { RiGalleryUploadFill } from "react-icons/ri";
 import ImagePreview from "./imagePreview";
 import { createEventFree } from "@/libs/action/event";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 // import { useAppSelector } from '@/redux/hooks';
 
@@ -22,9 +24,11 @@ export interface FormEventTicketFree {
 }
 
 
+
 export default function MenuEventTicketFree () {
 
-    
+    const router = useRouter()
+
     const mediaRef = useRef<HTMLInputElement | null>(null);
 
     const handleFileChange = (event: any, setFieldValue: any) => {
@@ -65,9 +69,16 @@ export default function MenuEventTicketFree () {
     // SETTINGAN FORMIK
     const createEvent = async (data: FormEventTicketFree) => {
         try {
-            const res = await createEventFree(data)
-            console.log(res)
+            const {result, ok} = await createEventFree(data)
+            if (!ok) {
+                throw result.msg
+            }
+            router.push(`/eodashboard`)
+            console.log(result);
+            console.log(ok)
+            toast.success(result.msg)
         } catch (error) {
+            toast.error("Free Event is Create")
             console.log(error)
         }
     }

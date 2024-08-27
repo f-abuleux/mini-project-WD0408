@@ -47,7 +47,7 @@ export default function ProfileUser() {
     return (
         <div>
             <div className="w-full bg-gradient-to-b from-primary to-primary to-20% pb-10 lg:pb-10">
-                <Image src="/bgprofile.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[1400px]" />
+                <Image src="/bgprofile.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[2200px]" />
                 <div className="flex flex-wrap justify-center gap-20 pt-[150px]">
                     <div className="avatar cursor-pointer flex justify-center pt-10">
                         <div className="ring-third ring-offset-base-100 w-[200px] rounded-full ring ring-offset-2">

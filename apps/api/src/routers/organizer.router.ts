@@ -1,4 +1,5 @@
 import { OrganizerController } from "@/controllers/organizer.controller";
+import { verifyToken } from "@/middlewares/auth.middleware";
 import { Router } from "express";
 
 export class OragnizerRouter {
@@ -13,7 +14,7 @@ export class OragnizerRouter {
       }
 
       private initializeRoutes() : void {
-            this.router.get("/:token", this.organizerController.getOrganizerData)
+            this.router.get("/",verifyToken,  this.organizerController.getOrganizerData)
       }
 
       getRouter() : Router {

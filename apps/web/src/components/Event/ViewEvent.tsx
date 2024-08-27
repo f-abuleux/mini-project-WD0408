@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 
 export default function ViewEvent() {
     const [data, setData] = useState<Event[]>([])
+    const [dataOrganizer, setDataOrganizer] = useState<any>([])
     const params = useParams()
     const id = +params.id
     const token = Cookies.get("token")
@@ -25,11 +26,13 @@ export default function ViewEvent() {
                 }
             })
             setData(event.data.data)
+            setDataOrganizer(event.data.dataeo)
         }
         fetchData()
     }, [])
     // console.log(data[0].name)
     // console.log(token)
+    console.log(dataOrganizer)
 
     return (
 
@@ -61,13 +64,13 @@ export default function ViewEvent() {
                                                             <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                                                         </div>
                                                     </div>
-                                                    <h1 className="text-white font-semibold text-start text-[16px] pt-1 hover:text-third">{data[0]?.eventOrganizerId}</h1>
+                                                    <h1 className="text-white font-semibold text-start text-[16px] pt-1 hover:text-third">{dataOrganizer[0]?.username}</h1>
                                                 </div>
                                                 <h4 className="font-semibold text-secondary pb-2"><span></span>{data[0]?.date}</h4>
                                                 <h4 className="font-semibold text-secondary pb-10">{data[0]?.location}</h4>
                                                 <div className="flex gap-5 justify-center pt-[100px] pb-3">
                                                     <Link
-                                                        href="/checkout"
+                                                        href={`/checkout/${data[0]?.id}`}
                                                         className="text-primary font-semibold py-2 px-[80px] rounded-full bg-secondary hover:bg-gradient-to-l from-third to-primary transition duration-300 ease-in-out hover:text-white">Buy Ticket</Link>
                                                 </div>
                                             </div>

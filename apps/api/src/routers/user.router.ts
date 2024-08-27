@@ -14,10 +14,11 @@ export class UserRouter {
 
       private initializeRoutes(): void {
             this.router.get("/", verifyToken ,this.userController.getUserData)
+            this.router.get("/review", verifyToken, this.userController.reviewEventbyUser)
 
       }
 
       getRouter(): Router {
             return this.router;
       }
-}
+} 

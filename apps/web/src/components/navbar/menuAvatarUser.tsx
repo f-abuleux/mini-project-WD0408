@@ -7,6 +7,8 @@ import { deleteCookie, getCookie } from '@/libs/action/server';
 import { user } from '@nextui-org/theme';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 // import { useAppSelector } from '@/redux/hooks';
 
 interface User {
@@ -29,11 +31,11 @@ export default function MenuAvatarUser() {
     const [data, setData] = useState<User[]>([]);
     const router = useRouter()
     const getUser = async () => {
-        const token = await getCookie("token")
-        const getUser = await fetch(`http://localhost:8000/api/users/${token}`, {
+        const token = await Cookies.get("token")
+        const getUser = await fetch(`http://localhost:8000/api/users/`, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token?.value}`,
+                "Authorization": `Bearer ${token}`,
             }
         })
 
@@ -57,6 +59,7 @@ export default function MenuAvatarUser() {
     const HandleLogout = () => {
         deleteCookie("token")
         router.push("/loginuser")
+        toast.success("Logout Success")
     }
 
     // const token = getCookie("token")

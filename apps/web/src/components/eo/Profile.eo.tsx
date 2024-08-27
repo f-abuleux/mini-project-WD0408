@@ -5,15 +5,14 @@ import { RiUser3Fill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { getCookie } from "@/libs/action/server";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-export interface IUser {
+export interface IEo {
     id: number;
     username: string;
     email: string;
     password: string;
-    referalnumber: string;
-    referalcode: string;
-    point: number;
     avatar: string;
     role: string;
     phonenumber: string;
@@ -22,24 +21,23 @@ export interface IUser {
 }
 
 export default function ProfileEO() {
-    const [data, setData] = useState([])
-
-    const getOrganizer = async () => {
-        const token = await getCookie("token")
-        const organizer = await fetch(`http://localhost:8000/api/oraganizers/${token}`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token?.value}`,
-            }
-        })
-        const response = await organizer.json()
-        setData(response.data);
-    }
-
-    useEffect(()=> {
-        getOrganizer()
-    })
+    const [data, setData] = useState<IEo>()
     
+    useEffect(()=> {
+        const fetchData = async () => {
+            const token = await Cookies.get("token")
+            const organizer = await axios.get(`http://localhost:8000/api/organizers`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            })
+            setData(organizer.data.data);
+        }
+        fetchData()
+    }, [])
+    
+    console.log(data)
 
     return (
         <div>
@@ -52,10 +50,11 @@ export default function ProfileEO() {
                         </div>
                     </div>
                     <div className="p-10 pt-0 lg:pt-16">
+                        <div className="h-10"></div>
                         <h1 className="text-2xl font-bold text-white flex gap-2"><RiUser3Fill size={26} className="pt-1" />
-                            <span>NAMA EO</span></h1>
+                            <span>{data?.username!}</span></h1>
                         <h3 className="text-md font-normal text-white flex gap-2 pt-2"><span><MdEmail size={25} className="" /></span>
-                            EMAIL EO</h3>
+                            {data?.email}</h3>
 
                     </div>
                 </div>

@@ -92,6 +92,20 @@ export class Event {
 
       async getEventPaid(req: Request, res: Response) {
             try {
+                  interface FilterS {
+                        OR?: [{ name: { contains: string } }]
+                  }
+
+                  // const pages: number = page? +page : 1;
+                  const { search, page } = req.query
+
+                  const filterQ: FilterS = {}
+                  if (search) {
+                        filterQ.OR = [
+                              { name: { contains: search as string } },
+                        ]
+                  }
+
                   const event = await prisma.event.findMany({
                         select: {
                               id: true,
@@ -115,7 +129,7 @@ export class Event {
                               }
                         },
                         orderBy: { date: 'asc', },
-                        where: { tickettype: 'paid' }
+                        where: filterQ
                   })
                   res.status(200).send({
                         status: "Success get event",
@@ -131,6 +145,17 @@ export class Event {
 
       async getEventFree(req: Request, res: Response) {
             try {
+                  interface FilterS {
+                        OR?: [{ name: { contains: string } }]
+                  }
+
+                  const { search, page } = req.query
+                  const filterQ: FilterS = {}
+                  if (search) {
+                        filterQ.OR = [
+                              { name: { contains: search as string } },
+                        ]
+                  }
                   const event = await prisma.event.findMany({
                         select: {
                               id: true,
@@ -170,35 +195,50 @@ export class Event {
 
       async getEventById(req: Request, res: Response) {
             try {
-                  console.log(req.user?.id)
-                  console.log(req.params.id)
-                  const event = await prisma.event.findMany({
+                  const eo = await prisma.eventOrganizer.findUnique({
                         where: {
-                              id: +req.user?.id!
-                        },
-                        select: {
-                              name: true,
-                              description: true,
-                              price: true,
-                              date: true,
-                              seat: true,
-                              location: true,
-                              tickettype: true,
-                              image: true,
-                              category: true,
-                              eventOrganizerId: true,
-                              eventorganizer: {
-                                    select: {
-                                          id: true,
-                                          username: true,
-                                          email: true,
-                                          phonenumber: true,
-                                    }
-                              }
+                              id: req.user?.id
                         }
                   })
+                  const event = await prisma.event.findMany({
+                        where: {
+                              eventOrganizerId: eo?.id,
+                              date: {
+                                    gte: new Date(),
+                              }
+                        }, orderBy: {
+                              date: 'asc'
+                        }
+                  })
+                  res.status(200).send({
+                        status: 'Success get event by id',
+                        data: event
+                  })
+            } catch (error) {
+                  res.status(400).send({
+                        status: 'Failed get event by id',
+                        msg: error
+                  })
+            }
+      }
 
-
+      async getEventByIdPass(req: Request, res: Response) {
+            try {
+                  const eo = await prisma.eventOrganizer.findUnique({
+                        where: {
+                              id: req.user?.id
+                        }
+                  })
+                  const event = await prisma.event.findMany({
+                        where: {
+                              eventOrganizerId: eo?.id,
+                              date: {
+                                    lte: new Date(),
+                              },
+                        }, orderBy: {
+                              date: 'desc'
+                        }
+                  })
                   res.status(200).send({
                         status: 'Success get event by id',
                         data: event
@@ -264,11 +304,18 @@ export class Event {
                   const event = await prisma.event.findMany({
                         where: {
                               id: +req.params.id
+                        },
+                  })
+
+                  const eventOrganizer = await prisma.eventOrganizer.findMany({
+                        where: {
+                              id: event[0].eventOrganizerId
                         }
                   })
                   res.status(200).send({
                         status: 'Success Get Detail Event',
-                        data: event
+                        data: event,
+                        dataeo: eventOrganizer
                   })
             } catch (error) {
                   res.status(400).send({
@@ -276,5 +323,9 @@ export class Event {
                         msg: error
                   })
             }
+      }
+
+      async getEventByTime(req: Request, res: Response) {
+
       }
 }

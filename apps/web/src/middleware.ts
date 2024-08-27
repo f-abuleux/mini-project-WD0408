@@ -5,7 +5,7 @@ import { deleteCookie, getCookie } from "./libs/action/server";
 //TAMBAH URL YANG INGIN DIPROTEKSI SEPERTI BUY NOW
 
 const protectPages = ["/home", "/", '/profile']
-const protectPagesOrganizer = ["/create", ]
+const protectPagesOrganizer = ["/create" , "/eodashboard"]
 
 
 export async function middleware(request: NextRequest) {
@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
       }
 
       if (token && url === "/loginorganizer") {
-            return NextResponse.redirect(new URL("/home", request.url))
+            return NextResponse.redirect(new URL("/eodashboard", request.url))
       }
 
       if (protectPages.includes(url)) {

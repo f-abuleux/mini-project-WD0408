@@ -8,10 +8,6 @@ import { getCookie } from "@/libs/action/server";
 import MenuAvatarEO from "./menuAvatarEO";
 
 export default function NavbarUser() {
-    const token = getCookie("token")?.value
-
-
-    console.log(token)
     return (
         <div>
             <Navbar shouldHideOnScroll className="fixed top-0 z-50 hidden lg:flex pt-5">
@@ -25,7 +21,7 @@ export default function NavbarUser() {
                         <Link href="/create" className='text-secondary font-semibold text-[15px] hover:text-orange-300'>CREATE EVENT</Link>
                     </NavbarItem>
                     <NavbarItem>
-                        <MenuAvatarEO token={token} />
+                        <MenuAvatarEO />
                     </NavbarItem>
                 </NavbarContent>
             </Navbar>

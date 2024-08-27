@@ -1,5 +1,6 @@
 import { ILogin } from "@/app/(home)/loginuser/page"
 import { ISignUpOrganizer } from "@/app/(home)/registerorganizer/page"
+import { toast } from "react-toastify"
 
 
 export const registerOrganizer = async (data: ISignUpOrganizer) => {
@@ -13,7 +14,7 @@ export const registerOrganizer = async (data: ISignUpOrganizer) => {
       console.log(res)
 
       if (!res.ok) throw new Error('Failed to register user')
-
+      toast.success('Register Success')
       return res.json()
 }
 

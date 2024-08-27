@@ -7,6 +7,8 @@ import { deleteCookie, getCookie } from '@/libs/action/server';
 import { user } from '@nextui-org/theme';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 // import { useAppSelector } from '@/redux/hooks';
 
 interface IOrganizer {
@@ -21,16 +23,16 @@ interface IOrganizer {
     createdAd: string;
 }
 
-export default function MenuAvatarEO(token: any) {
+export default function MenuAvatarEO() {
     const [ModalOpen, setModalOpen] = useState(false)
     const [data, setData] = useState<IOrganizer[]>([]);
     const router = useRouter()
     const getUser = async () => {
-        const token = await getCookie("token")
-        const getUser = await fetch(`http://localhost:8000/api/organizers/${token}`, {
+        const token = await Cookies.get("token")
+        const getUser = await fetch(`http://localhost:8000/api/organizers`, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token?.value}`,
+                "Authorization": `Bearer ${token}`,
             }
         })
 
@@ -54,6 +56,7 @@ export default function MenuAvatarEO(token: any) {
     const HandleLogout = () => {
         deleteCookie("token")
         router.push("/loginorganizer")
+        toast.success("Logout Success")
     }
 
     // const token = getCookie("token")

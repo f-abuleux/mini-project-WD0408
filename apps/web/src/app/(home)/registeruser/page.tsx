@@ -46,14 +46,14 @@ export default function SignUpUser() {
             try {
                   const res = await registerUser(data)
                   console.log(res)
-                  toast.info('Register Success');
+                  toast.success(res.msg)
             } catch (error) {
                   console.log(error)
             }
       }
       return (
             <div className="bg-gradient-to-b from-primary to-primary to-20%" id="#registeruser">
-                  <Image src="/bg6.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[1440px]" />
+                  <Image src="/bg6.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[2200px]" />
                   <div className="flex justify-center relative pt-10">
                         <Image src="/Logo-minpro.png" alt="hero" width={200} height={200}
                               className="w-[150px] mx-10 items-center"

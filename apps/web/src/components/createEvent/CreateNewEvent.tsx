@@ -9,7 +9,7 @@ export default function CreateEvent() {
         <div>
             <div className="w-full bg-gradient-to-b from-primary to-primary to-20% pb-20 lg:pb-20">
                 <div>
-                    <Image src="/createEvents.png" alt="Background" width={1500} height={1000} className="absolute opacity-50" />
+                    <Image src="/createEvents.png" alt="Background" width={800} height={100} className="absolute opacity-50 md:w-auto lg:w-[2200px]" />
                 </div>
                     <div className="flex justify-center relative pt-5">
                         <Image src="/Logo-minpro.png" alt="Logo" width={100} height={0} className='' />

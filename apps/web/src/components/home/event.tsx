@@ -1,15 +1,12 @@
-import Image from "next/image"
-import Link from "next/link"
-import img1 from '@/app/(home)/beranda/components/eventberbayar.png';
-import img2 from '@/app/(home)/beranda/components/eventgratis.png';
-import { TbArmchair } from "react-icons/tb";
-import AvatarUserEo from "../Profile/AvatarUserProfile";
-import CardEventHome from "./CardEventHomePaid";
+
 import Pagination from "./Pagination";
 import { Event, getEventFree, getEventPaid } from "@/libs/action/event";
 import { data } from "cypress/types/jquery";
 import CardEventHomePaid from "./CardEventHomePaid";
 import CardEventHomeFree from "./CardEventHomeFree";
+import InputSearch from "../search/InputSearch";
+
+
 
 export default function EventPresent() {
 
@@ -23,7 +20,7 @@ export default function EventPresent() {
                 <div id="EventTicket" className="lg:pl-[110px]">
                     <h3 className="text-lg text-secondary pt-8 pb-5 flex justify-center lg:justify-start">- EVENT TICKET -</h3>
                     <div className="flex flex-wrap justify-center gap-10 pb-5 lg:justify-start lg:pb-0">
-                        <input type="text" name="data" placeholder="Search Event Ticket" className="w-[330px] py-1 px-3 rounded-md bg-transparent text-secondary border border-solid border-secondary text-start" />
+                        <InputSearch />
                         {/* <select id="Month" className="bg-white text-primary pr-10 text-center rounded-md">
                             <option selected className="text-gray-500">Mouth</option>
                             <option value="January">January</option>
@@ -55,16 +52,13 @@ export default function EventPresent() {
                         </select>
                     </div>
                 </div>
-                <div className=" flex flex-wrap justify-center pb-5 p-5 lg:pt-10">
+                <div className="flex flex-wrap justify-center p-5 lg:pt-10">
                     <CardEventHomePaid />
-                </div>
-                <div>
-                    <Pagination />
                 </div>
                 <div id="EventFree" className="lg:pl-[110px]">
                     <h3 className="text-lg text-secondary pt-8 pb-5 flex justify-center lg:justify-start">- FREE EVENT -</h3>
                     <div className="flex flex-wrap justify-center gap-10 pb-5 lg:justify-start lg:pb-0">
-                        <input type="text" name="data" placeholder="Search Event Ticket" className="w-[330px] py-1 px-3 rounded-md bg-transparent text-secondary border border-solid border-secondary text-start" />
+                        <InputSearch />
                         {/* <select id="Category" className="bg-white text-primary pr-10 text-center rounded-md">
                             <option selected className="text-gray-500">Mouth</option>
                             <option value="January">January</option>
@@ -96,11 +90,8 @@ export default function EventPresent() {
                         </select>
                     </div>
                 </div>
-                <div className=" flex flex-wrap justify-center p-5 lg:pt-10">
+                <div className="flex flex-wrap justify-center p-5 lg:pt-10">
                     <CardEventHomeFree />
-                </div>
-                <div className="pb-10">
-                    <Pagination />
                 </div>
                 <div className="p-20 flex flex-wrap gap-32 justify-center">
                     <div>

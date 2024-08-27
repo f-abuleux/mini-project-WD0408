@@ -8,6 +8,9 @@ import * as yup from "yup";
 import { RiGalleryUploadFill } from "react-icons/ri";
 import ImagePreview from "./imagePreview";
 import { createEventPaid } from "@/libs/action/event";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { result } from "cypress/types/lodash";
 
 // import { useAppSelector } from '@/redux/hooks';
 
@@ -23,7 +26,11 @@ export interface FormEventTicket {
 }
 
 export default function MenuEventTicket() {
+    const router = useRouter()
 
+    const handleRouter = () => {
+        router.push("/eodashboard")
+    }
 
     const mediaRef = useRef<HTMLInputElement | null>(null);
 
@@ -62,12 +69,20 @@ export default function MenuEventTicket() {
         }
     }
 
+    
+
     // SETTINGAN FORMIK
     const createEvent = async (data: FormEventTicket) => {
         try {
-            const res = await createEventPaid(data)
-            console.log(res)
+            const {result, ok} = await createEventPaid(data)
+            if (!ok) {
+                throw result.msg
+            }
+            console.log(result);
+            console.log(ok);
+            toast.success(result.msg)
         } catch (error) {
+            toast.error("Event Ticket is Create")
             console.log(error)
         }
     }
@@ -117,6 +132,7 @@ export default function MenuEventTicket() {
                                 createEvent(value)
                                 alert(JSON.stringify(value))
                                 action.resetForm()
+                                handleRouter()
                                 console.log(value)
                             }}
                         >
@@ -183,16 +199,16 @@ export default function MenuEventTicket() {
                                                 </div>
                                                 <div className="lg:pt-5">
                                                     <p className="text-white font-normal text-sm pb-[6px]">Date Event</p>
-                                                    <Field
-                                                        type="date"
-                                                        name="date"
-                                                        className='bg-secondary rounded-lg text-black py-1 p-2' />
+                                                        <Field
+                                                            type="date"
+                                                            name="date"
+                                                            className='bg-secondary rounded-lg text-black py-1 p-2' />
 
-                                                    <ErrorMessage
-                                                        name="date"
-                                                        component={'div'}
-                                                        className="text-xs text-red-700"
-                                                    />
+                                                        <ErrorMessage
+                                                            name="date"
+                                                            component={'div'}
+                                                            className="text-xs text-red-700"
+                                                        />
                                                 </div>
                                                 <div className="lg:pt-5">
                                                     <p className="text-white font-normal text-sm">Visitor Quota</p>
